@@ -7,26 +7,32 @@
 
 import databases as db
 import re
-cursor  = db.conn.cursor();
+cursor  = db.conn.cursor()
 
 def create_account():
 
-    new_username = input("New Username: ")
-    if len(new_username) <= 2:
-        print("Username must be at least 3 characters long! ")
-        exit(1)
+    while True:
+
+        new_username = input("New Username: ")
+        if len(new_username) <= 2:
+            print("Username must be at least 3 characters long! ")
+            continue
+        else: break
+
+    while True:
+        new_password = input("New Password: ")
+        if len(new_password) < 6:
+            print("Password must be at least 6 charactes long! ")
+            continue
     
-    new_password = input("New Password: ")
-    if len(new_password) < 6:
-        print("Password must be at least 6 charactes long! ")
-        exit(2)
-    
-    # regex tarkistaa että salasanassa on numero ja iso kirjain
-    pattern = r'(?=.*[A-Z])(?=.*\d)'    
-    res = re.match(pattern, new_password) 
-    if not res:
-        print("Password must include at least one capital letter and a number! ")
-        exit(3)
+        # regex tarkistaa että salasanassa on numero ja iso kirjain ja ei sisällä välilyöntejä
+        pattern = '^(?!.*\\s)(?=.*[A-Z])(?=.*\\d).+$'
+
+        res = re.match(pattern, new_password)
+        if not res:
+            print("Password must include at least one capital letter and a number and can't contain spaces! ")
+            continue
+        else: break
 
     print(f"New username: {new_username}, new password: {new_password}")
     table   = "game"
@@ -35,7 +41,7 @@ def create_account():
     res = cursor.fetchall()
     res = res[0][0]
     sql = (f'INSERT INTO {table} (screen_name, password) VALUES '
-           f'({new_username}, {new_password}) WHERE id={res+1}')
+           f'({new_username}, {new_password}) WHERE id={res}')
 
     cursor.execute(sql)
     res = cursor.fetchall()
@@ -50,14 +56,14 @@ def login():
     username = input("Input your username: ")
     password = input("Input your password: ")
 
-    username_check  = (f'SELECT * FROM game WHERE screen_name="{username}"')
+    username_check  = f'SELECT * FROM game WHERE screen_name="{username}"'
     pw_check        = (f'SELECT * FROM game WHERE password="{password}" AND '
                        f'screen_name="{username}"')
 
     cursor.execute(username_check)    
     res = cursor.fetchall()
     if not res:
-        print(f"Login Failed! (Wrong username) ")
+        print(f"Login Failed! (Username not found) ")
         exit(4)
     else:
         print(f"Welcome, {username}!")
@@ -68,7 +74,7 @@ def login():
         print("Login Failed! (Wrong password) ")
 
 
-
+create_account()
 
 
 
