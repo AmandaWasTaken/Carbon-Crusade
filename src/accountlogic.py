@@ -9,10 +9,10 @@ import databases as db
 import re
 cursor  = db.conn.cursor()
 
+# Funktio hoitaa uuden käyttäjätilin luonnin ja lisäämisen tietokantaan
 def create_account():
 
     while True:
-
         new_username = input("New Username: ")
         if len(new_username) <= 2:
             print("Username must be at least 3 characters long! ")
@@ -34,12 +34,10 @@ def create_account():
             continue
         else: break
 
-    print(f"New username: {new_username}, new password: {new_password}")
     table   = "game"
     last_id = "SELECT LAST_INSERT_ID()"
     cursor.execute(last_id)
-    res = cursor.fetchall()
-    res = res[0][0]
+    res = cursor.fetchall()[0][0]
     sql = (f'INSERT INTO {table} (screen_name, password) VALUES '
            f'({new_username}, {new_password}) WHERE id={res}')
 
@@ -47,10 +45,9 @@ def create_account():
     res = cursor.fetchall()
     for line in res:
         print(line)
-    print(sql)
 
 
-
+# Funktio hoitaa käyttäjän sisäänkirjautumisen
 def login():
 
     username = input("Input your username: ")
