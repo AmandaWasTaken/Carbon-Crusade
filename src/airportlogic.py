@@ -11,6 +11,7 @@ import random
 import databases
 from geopy.distance import great_circle
 
+# Haistappa juho kukka
 def randomAirport():
 
     sql = """
