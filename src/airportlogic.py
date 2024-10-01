@@ -11,7 +11,7 @@ import random
 import databases
 from geopy.distance import great_circle
 
-# Haistappa juho kukka
+# Hakee lentokentän ja koordinaatit, josta pelaaja lähtee liikkelle. 
 def randomAirport():
 
     sql = """
@@ -34,11 +34,14 @@ def randomAirport():
 
     return rand_airportName, rand_countryName, rand_startPoint
 
+# Tällä lasketaan etäisyys lähtöpisteen ja muiden pisteiden välillä.
 def distance(startPoint, destPoint):
-    #Tällä lasketaan etäisyys lähtömaan ja muiden maiden välillä.
+    
     dist = great_circle(startPoint, destPoint).kilometers
     return dist
 
+# Hakee 30 lentokenttää, joista valitaan 5 arvauksia varten. Kaksi valitaan lähimmistä viidestä ja loput jäljellä olevasta listasta. Tehdään näistä vielä 
+# listat, joissa maiden nimet, koordinaatit ja etäisyys lähtöpisteestä.  
 def getGuesses(exceptionCountry, startPoint):
 
     sql = """
