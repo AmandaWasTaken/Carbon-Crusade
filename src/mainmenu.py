@@ -35,3 +35,4 @@ while menu_answer != "aloita peli" or menu_answer != "vaikeustaso" or menu_answe
         print("ANNETTU KOMENTO EI VASTAA ANNETTUJA VAIHTOEHTOJA")
         menu_answer = input("KIRJOITA YKSI ANNETUISTA VALINNOISTA: ")
         menu_answer = menu_answer.lower()
+
