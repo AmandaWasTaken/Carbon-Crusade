@@ -51,28 +51,28 @@ def create_account():
 def login():
 
     username = input("Input your username: ")
-    password = input("Input your password: ")
 
     username_check  = f'SELECT * FROM game WHERE screen_name="{username}"'
-    pw_check        = (f'SELECT * FROM game WHERE password="{password}" AND '
-                       f'screen_name="{username}"')
 
-    cursor.execute(username_check)    
+    cursor.execute(username_check)
     res = cursor.fetchall()
     if not res:
         print(f"Login Failed! (Username not found) ")
         exit(4)
-    else:
-        print(f"Welcome, {username}!")
 
+
+    password = input("Input your password: ")
+    pw_check = (f'SELECT * FROM game WHERE password="{password}" AND '
+                f'screen_name="{username}"')
     cursor.execute(pw_check)
     res = cursor.fetchall()
     if not res:
         print("Login Failed! (Wrong password) ")
+        exit(5)
+    else:
+        print(f"Welcome, {username}")
 
-
-create_account()
-
+login()
 
 
 
