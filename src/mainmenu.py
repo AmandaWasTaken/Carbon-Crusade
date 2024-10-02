@@ -1,4 +1,6 @@
 import time
+
+#Printtaa pelin logon
 def print_logo():
     print(""" ____           _                      
 / ___|__ _ _ __| |__   ___  _ __       
@@ -12,32 +14,37 @@ def print_logo():
     return
 
 def mainmenu_selections():
-    print("\n:ALOITA PELI:\n:VAIKEUSTASO:\n:HIGHSCORET:\n:CREDITS:\n:SULJE PELI:")
-    menu_answer = input("KIRJOITA YKSI ANNETUISTA VALINNOISTA: ").lower()
-    return menu_answer
+    choices = {1: ":ALOITA PELI:", 2: ":VAIKEUSTASO:", 3: ":HIGHSCORET:", 4: ":CREDITS:", 5: ":SULJE PELI:"}
+    menu_answer_instructions = "\nVALITSE KIRJOITTAMALLA VAIHTOEHTOA VASTAAVA NUMERO: "
 
-def menu_answer_check(menu_answer):
-    while menu_answer != "aloita peli" or menu_answer != "vaikeustaso" or menu_answer != "highscoret" or menu_answer != "credits" or menu_answer != "sulje peli":
-        if menu_answer == "aloita peli":
-            print("starting game placeholder")
-        elif menu_answer == "vaikeustaso":
-            print(":VAIKEUSTASOT:\n:HELPPO:\n:NORMAALI:\n:VAIKEA:\n:TAKAISIN:")
-            menu_answer = input("KIRJOITA YKSI ANNETUISTA VAIHTOEHDOISTA: ").lower()
-            if menu_answer == "takaisin":
-                mainmenu_selections()
-        elif menu_answer == "highscoret":
-            print("highscore placeholder")
-        elif menu_answer == "credits":
-            print("credits placeholder")
-        elif menu_answer == "sulje peli":
-            print(f"SULJETAAN PELIÄ...")
-            time.sleep(2)
-            exit()
-        else:
+    print(f"\n1 {choices[1]}\n2 {choices[2]}\n3 {choices[3]}\n4 {choices[4]}\n5 {choices[5]}")
+    menu_answer = input(f"{menu_answer_instructions}")
+    mainmenu_return = [menu_answer, choices]
+    return mainmenu_return
+
+def menu_answer_check(menu_answer,choices):
+
+    menu_answer_instructions = "\nVALITSE KIRJOITTAMALLA VAIHTOEHTOA VASTAAVA NUMERO: "
+    difficulties = {1: ":HELPPO:", 2: ":NORMAALI:", 3: ":VAIKEA:", 4: ":TAKAISIN:"}
+
+    while menu_answer not in choices.keys():
             print("ANNETTU KOMENTO EI VASTAA ANNETTUJA VAIHTOEHTOJA")
-            menu_answer = input("KIRJOITA YKSI ANNETUISTA VALINNOISTA: ").lower()
+            menu_answer = input(f"{menu_answer_instructions}")
 
+    if menu_answer == "1":
+        print("starting game placeholder")
+    elif menu_answer == "2":
+        print(f":VAIKEUSTASOT:\n1{difficulties[1]}\n2 {difficulties[2]}\n3 {difficulties[3]}\n4 {difficulties[4]}")
+    elif menu_answer == "3":
+        print("highscore placeholder")
+    elif menu_answer == "4":
+        print("credits placeholder")
+    elif menu_answer == "5":
+        print(f"SULJETAAN PELIÄ...")
+        time.sleep(1)
+        exit()
     return
 
 print_logo()
-menu_answer_check(mainmenu_selections())
+mainmenu_selections()
+menu_answer_check(mainmenu_selections()[0],mainmenu_selections()[1])
