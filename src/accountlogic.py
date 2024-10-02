@@ -1,6 +1,5 @@
 ### TODO    fix create_account()
 ###         SQL queryssä tai db:ssä vika
-###         finish login()
 
 ###         Jos haluutte testailla näitä nii lisätkää vaikka tän filun 
 ###         pohjaan ku näitä ei viel kutsuta missään
@@ -9,6 +8,17 @@ import databases as db
 import re
 cursor  = db.conn.cursor()
 
+
+def check_reserved(value_to_check: str) -> bool:
+
+    sql = f'select * from game where screen_name="{value_to_check}'
+    cursor.execute(sql)
+    res = cursor.fetchall()
+    if not res:
+        return True
+    else: return False
+
+
 # Funktio hoitaa uuden käyttäjätilin luonnin ja lisäämisen tietokantaan
 def create_account():
 
@@ -16,6 +26,9 @@ def create_account():
         new_username = input("New Username: ")
         if len(new_username) <= 2:
             print("Username must be at least 3 characters long! ")
+            continue
+        if check_reserved(new_username):
+            print("Username Taken")
             continue
         else: break
 
@@ -50,31 +63,29 @@ def create_account():
 # Funktio hoitaa käyttäjän sisäänkirjautumisen
 def login():
 
-    username = input("Input your username: ")
+    while True:
+        username = input("Input your username: ")
+        username_check  = f'SELECT * FROM game WHERE screen_name="{username}"'
+        cursor.execute(username_check)
+        res = cursor.fetchall()
+        if not res:
+            print(f"Login Failed! (Username not found) ")
+            continue
+        break
 
-    username_check  = f'SELECT * FROM game WHERE screen_name="{username}"'
-
-    cursor.execute(username_check)
-    res = cursor.fetchall()
-    if not res:
-        print(f"Login Failed! (Username not found) ")
-        exit(4)
-
-
-    password = input("Input your password: ")
-    pw_check = (f'SELECT * FROM game WHERE password="{password}" AND '
+    while True:
+        password = input("Input your password: ")
+        pw_check = (f'SELECT * FROM game WHERE password="{password}" AND '
                 f'screen_name="{username}"')
-    cursor.execute(pw_check)
-    res = cursor.fetchall()
-    if not res:
-        print("Login Failed! (Wrong password) ")
-        exit(5)
-    else:
+        cursor.execute(pw_check)
+        res = cursor.fetchall()
+        if not res:
+            print("Login Failed! (Wrong password) ")
+            continue
         print(f"Welcome, {username}")
+        break
 
 login()
-
-
 
 
 
