@@ -1,23 +1,18 @@
-### TODO    fix create_account()
-###         SQL queryssä tai db:ssä vika
-
 ###         Jos haluutte testailla näitä nii lisätkää vaikka tän filun 
 ###         pohjaan ku näitä ei viel kutsuta missään
 
 import databases as db
 import re
-cursor  = db.conn.cursor()
-
+cursor = db.conn.cursor()
 
 def check_reserved(value_to_check: str) -> bool:
 
-    sql = f'select * from game where screen_name="{value_to_check}'
+    sql = f'select * from game where screen_name="{value_to_check}"'
     cursor.execute(sql)
     res = cursor.fetchall()
     if not res:
-        return True
-    else: return False
-
+        return False 
+    return True
 
 # Funktio hoitaa uuden käyttäjätilin luonnin ja lisäämisen tietokantaan
 def create_account():
@@ -30,7 +25,7 @@ def create_account():
         if check_reserved(new_username):
             print("Username Taken")
             continue
-        else: break
+        break
 
     while True:
         new_password = input("New Password: ")
@@ -40,25 +35,17 @@ def create_account():
     
         # regex tarkistaa että salasanassa on numero ja iso kirjain ja ei sisällä välilyöntejä
         pattern = '^(?!.*\\s)(?=.*[A-Z])(?=.*\\d).+$'
-
         res = re.match(pattern, new_password)
         if not res:
             print("Password must include at least one capital letter and a number and can't contain spaces! ")
             continue
-        else: break
+        break
 
     table   = "game"
-    last_id = "SELECT LAST_INSERT_ID()"
-    cursor.execute(last_id)
-    res = cursor.fetchall()[0][0]
-    sql = (f'INSERT INTO {table} (screen_name, password) VALUES '
-           f'({new_username}, {new_password}) WHERE id={res}')
+    sql = (f'INSERT INTO {table} (screen_name, password) VALUES ("{new_username}", "{new_password}")')
 
     cursor.execute(sql)
     res = cursor.fetchall()
-    for line in res:
-        print(line)
-
 
 # Funktio hoitaa käyttäjän sisäänkirjautumisen
 def login():
@@ -82,12 +69,6 @@ def login():
         if not res:
             print("Login Failed! (Wrong password) ")
             continue
+
         print(f"Welcome, {username}")
         break
-
-login()
-
-
-
-
-
