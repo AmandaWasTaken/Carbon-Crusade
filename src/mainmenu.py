@@ -1,6 +1,16 @@
 import time
 
-#Printtaa pelin logon
+
+# Usein toistuvia printtejä
+MENU_COMMAND_INSTRUCTIONS = "\nVALITSE KIRJOITTAMALLA VAIHTOEHTOA VASTAAVA NUMERO: "
+MENU_COMMAND_FALSE = "ANNETTU KOMENTO EI VASTAA ANNETTUJA VAIHTOEHTOJA"
+
+# Valintojen sanakirjat
+MAIN_MENU_CHOICES = {"1": ":ALOITA PELI:", "2": ":HIGHSCORET:", "3": ":CREDITS:", "4": ":SULJE PELI:"}
+DIFFICULTIES = {"1": ":HELPPO:", "2": ":NORMAALI:", "3": ":VAIKEA:", "4": ":TAKAISIN:"}
+
+
+# Printtaa pelin logon
 def print_logo():
     print(""" ____           _                      
 / ___|__ _ _ __| |__   ___  _ __       
@@ -13,39 +23,63 @@ def print_logo():
  \\____|_|   \\__,_|___/\\__,_|\\__,_|\\___|""")
     return
 
+# Printtaa mainmenu vaihtoehdot ja ottaa pelaajan komennon
 def mainmenu_selection():
-    choices = {"1": ":ALOITA PELI:", "2": ":VAIKEUSTASO:", "3": ":HIGHSCORET:", "4": ":CREDITS:", "5": ":SULJE PELI:"}
-    menu_answer_instructions = "\nVALITSE KIRJOITTAMALLA VAIHTOEHTOA VASTAAVA NUMERO: "
 
-    print(f"\n1 {choices["1"]}\n2 {choices["2"]}\n3 {choices["3"]}\n4 {choices["4"]}\n5 {choices["5"]}")
-    menu_answer = input(menu_answer_instructions)
-    return menu_answer, choices
+    for i in MAIN_MENU_CHOICES:
+        print(i, MAIN_MENU_CHOICES[i])
+    menu_command = input(MENU_COMMAND_INSTRUCTIONS)
+    return menu_command
 
-def menu_answer_check(menu_answer_parameter,choices_parameter):
+def is_command_in_menu(command, menu):
 
-    menu_answer_instructions = "\nVALITSE KIRJOITTAMALLA VAIHTOEHTOA VASTAAVA NUMERO: "
-
-    while menu_answer_parameter not in choices_parameter.keys():
-            print("ANNETTU KOMENTO EI VASTAA ANNETTUJA VAIHTOEHTOJA")
-            menu_answer_parameter = input(menu_answer_instructions)
-
+    while command not in menu.keys():
+        print(MENU_COMMAND_FALSE)
+        menu_command_parameter = input(MENU_COMMAND_INSTRUCTIONS)
     return
 
-#difficulties = {1: ":HELPPO:", 2: ":NORMAALI:", 3: ":VAIKEA:", 4: ":TAKAISIN:"}
+def command_to_menu_check(command,menu):
 
-#if menu_answer == "1":
-#    print("starting game placeholder")
-#elif menu_answer == "2":
-#    print(f":VAIKEUSTASOT:\n1{difficulties[1]}\n2 {difficulties[2]}\n3 {difficulties[3]}\n4 {difficulties[4]}")
-#elif menu_answer == "3":
-#    print("highscore placeholder")
-#elif menu_answer == "4":
-#    print("credits placeholder")
-#elif menu_answer == "5":
-#    print(f"SULJETAAN PELIÄ...")
-#    time.sleep(1)
-#    exit()
+    match command:
+        case command if command ==
+    return
 
-print_logo()
-menu_answer_variable, choices_variable = mainmenu_selection()
-menu_answer_check(menu_answer_variable,choices_variable)
+# Tarkistaa pelaajan komennon ja toimii sen mukaisesti
+#def menu_command_check(menu_command_parameter):
+
+    # Tarkistaa onko komento sanakirjassa ja pyytää antamaan uuden kommenon niin kauan kunnes se on
+#    while menu_command_parameter not in MAIN_MENU_CHOICES.keys():
+#            print(MENU_COMMAND_FALSE)
+#            menu_command_parameter = input(MENU_COMMAND_INSTRUCTIONS)
+
+    # Tarkistaa mikä annettu komento on ja toimii sen mukaisesti
+#    while menu_command_parameter != "4":
+#        if menu_command_parameter == "1":
+#            for i in DIFFICULTIES:
+#                print(DIFFICULTIES[i])
+#
+#            menu_command_parameter = input(MENU_COMMAND_INSTRUCTIONS)
+#
+#            if menu_command_parameter == "1":
+#                print(f"helppo placeholder")
+#            elif menu_command_parameter == "2":
+#                print("normaali placeholder")
+#            elif menu_command_parameter == "3":
+#                print("vaikea placeholder")
+#            elif menu_command_parameter == "4":
+#                print("takaisin placeholder")
+#        elif menu_command_parameter == "2":
+#            print("highscore placeholder")
+#        elif menu_command_parameter == "3":
+#            print("credits placeholder")
+#        elif menu_command_parameter == "4":
+#            print(f"SULJETAAN PELIÄ...")
+#            time.sleep(1)
+#            exit()
+
+#    return
+
+if __name__ == "__main__":
+    print_logo()
+
+#    menu_command_check(mainmenu_selection())
