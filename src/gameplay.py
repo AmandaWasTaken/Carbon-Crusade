@@ -90,26 +90,29 @@ def playerGetsCorrectAnswer(current_country, remaining_countries, flight_options
 
     co2_emissions = co2_emissions * 0.15 * 396
 
-    print(f"Päätit lentää maahan {player_choice_country}, joten sait kerrytettyä {co2_emissions:,}kg co2-päästöjä.")
+    print(f"Päätit lentää maahan {player_choice_country}, joten sait kerrytettyä {co2_emissions:,.0f}kg co2-päästöjä.")
     return co2_emissions
 
 
 
 def startGameplayLoop(difficulty):
+
+    print(f"{difficulty}")
+
     game_running = True
     score = 0
-    turns_left = 3
+    turns_left = 12
     difficulties = ("Helppo", "Normaali", "Vaikea")
     score_limits = (1000000, 2000000, 3000000)
 
     print(f"\nTervetuloa Carbon Crusade:n pariin! Valitsemasi vaikeustaso on {difficulties[difficulty - 1]}, ")
-    print(f"joten sinun täytyy kerätä {score_limits[difficulty - 1]:,}kg verran co2-päästöjä päästäksesi pelin läpi.\n")
+    print(f"joten sinun täytyy kerätä {score_limits[difficulty - 1]:,.0f}kg co2-päästöjä päästäksesi pelin läpi.\n")
     time.sleep(3)
     printInstructions()
     time.sleep(3)
 
     while game_running and turns_left > 0:
-        print(f"\nOlet aiheuttanut {score:,}kg co2-päästöjä, kun sinulla on jäljellä {turns_left}kk aikaa.\n")
+        print(f"\nOlet aiheuttanut {score:,.0f}kg co2-päästöjä, kun sinulla on jäljellä {turns_left}kk aikaa.\n")
 
         current_country = airportlogic.randomAirport()
 
@@ -139,7 +142,7 @@ def startGameplayLoop(difficulty):
                 print(f"\nVastauksesi on valitettavasti väärin. Oikea vastaus on {current_country[1]}.")
                 print("Et valitettavasti saanut kerrytettyä yhtään co2-päästöjä tässä kuussa.")
                 turns_left -= 1
-    print(f"Kiitos Carbon Crusaden pelaamisesta! Sait kerättyä itsellesi {score:,}kg verran co2-päästöjä!")
+    print(f"Kiitos Carbon Crusaden pelaamisesta! Sait kerättyä itsellesi {score:,.0f}kg verran co2-päästöjä!")
     return (score, difficulty)
 
-startGameplayLoop(1)
+#startGameplayLoop(1)
