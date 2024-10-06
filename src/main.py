@@ -10,8 +10,10 @@ def main() -> None:
         select = input("Syötä 1 jos haluat luoda käyttäjän, 2 jos haluat kirjautua sisään. ")
         if select == "1":
             create_account()
+            break
         elif select == "2":
-            login()
+            # login()
+            break
         else:
             print("Virheellinen syöte, yritä uudestaan.")
 
