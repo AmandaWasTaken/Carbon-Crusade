@@ -42,39 +42,39 @@ def is_command_in_menu(command,menu):
 
 def command_to_main_menu_check(command):
 
-    is_command_in_menu(command,MAIN_MENU_CHOICES)
+    is_command_in_menu(command, MAIN_MENU_CHOICES)
 
-    match command:
-        case command if command == "1":
-            command_to_difficulty(command)
-        case command if command == "2":
-            print("highscore placeholder")
-        case command if command == "3":
-            print("CREDITS\n")
-            for i in CREDITS:
-                print(f":{i}:")
-        case command if command == "4":
-            print("suljeetaan peliä...")
-            time.sleep(1)
-            exit()
+    if command == "1":
+        command_to_difficulty(command)
+    elif command == "2":
+        print("highscore placeholder")
+    elif command == "3":
+        print("CREDITS\n")
+        for i in CREDITS:
+            print(f":{i}:")
+    elif command == "4":
+        print("suljeetaan peliä...")
+        time.sleep(1)
+        exit()
 
     return
 
 def command_to_difficulty(command):
 
-    menu_selection(DIFFICULTIES)
-    is_command_in_menu(command,DIFFICULTIES)
+    command = menu_selection(DIFFICULTIES)
+    is_command_in_menu(command, DIFFICULTIES)
 
-    match command:
-        case command if command == "1":
-            startGameplayLoop()
-        case command if command == "2":
-            print("normaali placeholder")
-        case command if command == "3":
-            print("vaikea placeholder")
-        case command if command == "4":
-            print_logo()
-            command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
+    if command == "1":
+        startGameplayLoop(1)
+    elif command == "2":
+        startGameplayLoop(2)
+    elif command == "3":
+        startGameplayLoop(3)
+    elif command == "4":
+        print_logo()
+        command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
+
+    return
 
 # Tarkistaa pelaajan komennon ja toimii sen mukaisesti
 #def menu_command_check(menu_command_parameter):
