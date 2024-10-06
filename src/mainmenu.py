@@ -32,7 +32,7 @@ def menu_selection(choices):
     menu_command = input(MENU_COMMAND_INSTRUCTIONS)
     return menu_command
 
-
+# Testaa onko komento validi
 def is_command_in_menu(command,menu):
 
     while command not in menu.keys():
@@ -40,6 +40,7 @@ def is_command_in_menu(command,menu):
         command = input(MENU_COMMAND_INSTRUCTIONS)
     return
 
+# Suorittaa main menu vaihtoehdoilla menu_selection(), sitten tarkistaa tuloksen ja toimii sen mukaisesti
 def command_to_main_menu_check(command):
 
     is_command_in_menu(command, MAIN_MENU_CHOICES)
@@ -59,6 +60,7 @@ def command_to_main_menu_check(command):
 
     return
 
+# Suorittaa vaikeustaso vaihtoehdoilla menu_selection(), sitten tarkistaa tuloksen ja toimii sen mukaisesti
 def command_to_difficulty(command):
 
     command = menu_selection(DIFFICULTIES)
@@ -76,42 +78,11 @@ def command_to_difficulty(command):
 
     return
 
-# Tarkistaa pelaajan komennon ja toimii sen mukaisesti
-#def menu_command_check(menu_command_parameter):
-
-    # Tarkistaa onko komento sanakirjassa ja pyytää antamaan uuden kommenon niin kauan kunnes se on
-#    while menu_command_parameter not in MAIN_MENU_CHOICES.keys():
-#            print(MENU_COMMAND_FALSE)
-#            menu_command_parameter = input(MENU_COMMAND_INSTRUCTIONS)
-
-    # Tarkistaa mikä annettu komento on ja toimii sen mukaisesti
-#    while menu_command_parameter != "4":
-#        if menu_command_parameter == "1":
-#            for i in DIFFICULTIES:
-#                print(DIFFICULTIES[i])
-#
-#            menu_command_parameter = input(MENU_COMMAND_INSTRUCTIONS)
-#
-#            if menu_command_parameter == "1":
-#                print(f"helppo placeholder")
-#            elif menu_command_parameter == "2":
-#                print("normaali placeholder")
-#            elif menu_command_parameter == "3":
-#                print("vaikea placeholder")
-#            elif menu_command_parameter == "4":
-#                print("takaisin placeholder")
-#        elif menu_command_parameter == "2":
-#            print("highscore placeholder")
-#        elif menu_command_parameter == "3":
-#            print("credits placeholder")
-#        elif menu_command_parameter == "4":
-#            print(f"SULJETAAN PELIÄ...")
-#            time.sleep(1)
-#            exit()
-
-#    return
+# Suorittaa koko main menu koodin
+def run_main_menu():
+    print_logo()
+    command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
 
 if __name__ == "__main__":
     print_logo()
     command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
-#    menu_command_check(mainmenu_selection())
