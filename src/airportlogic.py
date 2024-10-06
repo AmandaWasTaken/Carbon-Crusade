@@ -1,10 +1,3 @@
-### TODO
-### mahdollisesti koita grind getGuesses hakemaan n määrä maita
-###
-### kommentit
-### yksi lista josta tehdä toi arvaus
-### eli randAp + selectedCountries
-
 
 
 import random
@@ -58,7 +51,6 @@ def getGuesses(exceptionCountry, startPoint):
     cursor = databases.conn.cursor()
     cursor.execute(sql)
     countries = cursor.fetchall()
-    # Tehdään lista sql-haulla saaduista tiedoista.
 
     # Lista, jossa maat, koordinaatit ja etäisyys alkupisteeseen.
     distances = []
@@ -67,9 +59,7 @@ def getGuesses(exceptionCountry, startPoint):
         coords = (country[1], country[2])
         dist = distance(startPoint, coords)
         distances.append((countryName, coords, dist))
-    #List comprehension??
 
-    #print(distances)
 
     # Järjestetään etäisyyksien mukaan ja valitaan lähimmästä viidestä 2
     closestCountries = sorted(distances, key=lambda x: x[2])[:5]
@@ -80,56 +70,12 @@ def getGuesses(exceptionCountry, startPoint):
     for country in distances:
         if country not in selectedClosest:
             remainingCountries.append(country)
-    # List comprehension when??
-
-    #
-    # ^^ vois vaa valita distances listasta ja laittaa exclude
-    # maat jotka on selectedClosest ??
-    #
-    #
 
 
     selectedRemaining = random.sample(remainingCountries, 3)
     finalSelection = selectedClosest + selectedRemaining # Lopullinen lista maista
 
-    # Pitäiskö tää saada palauttaa se määrä maita jonka haluan?
-
     return finalSelection, distances
-
-
-rand_airportName, rand_countryName, rand_startPoint = randomAirport()
-selectedCountries, allCountries = getGuesses(rand_airportName, rand_startPoint)
-
-
-selectedCountryNames = []
-for country in selectedCountries:
-    selectedCountryNames.append(country[0])
-# list comprehension bruda
-
-guesses = [rand_countryName] + selectedCountryNames
-random.shuffle(guesses)
-print(guesses)
-
-
-
-# Alla koodin testailua varten
-#
-#
-#
-#
-#
-
-startLat, startLon = rand_startPoint
-#print(f'Starting point: {rand_countryName}, {rand_airportName}, ({startLat}, {startLon})\n')
-
-
-
-
-for country in selectedCountries:
-    destName = country[0]
-    destPoint = country[1]
-    distanceFrom = country[2]
-    #print(f'Maassa {destName} sijaitsevan lentokentän etäisyys lähtöpisteestä on {distanceFrom: .0f}km. Päätepisteen koordinaatit ovat {destPoint}. ')
 
 
 
