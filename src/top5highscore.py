@@ -1,16 +1,8 @@
-import mysql.connector
-
-connection = mysql.connector.connect(
-    host='localhost',
-    port=3306,
-    database='hctest2',
-    user='root',
-    password='k0ira'
-)
+import databases
 
 def get_top_scores():
     try:
-        cursor = connection.cursor()
+        cursor = databases.conn.cursor()
         query = """
             SELECT game.screen_name, goal.id AS goal_id, goal.highscore
             FROM score
@@ -33,6 +25,6 @@ def get_top_scores():
 
     finally:
         cursor.close()
-        connection.close()
+        databases.conn.close()
 
 get_top_scores()

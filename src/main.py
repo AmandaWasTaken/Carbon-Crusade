@@ -12,7 +12,7 @@ def main() -> None:
             create_account()
             break
         elif select == "2":
-            # login()
+            login()
             break
         else:
             print("Virheellinen syöte, yritä uudestaan.")
