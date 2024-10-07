@@ -1,6 +1,5 @@
 # TODO
 # lisää random eventtejä ja implementointi pääohjelmaan
-
 from random import randint
 
 
@@ -43,10 +42,11 @@ def positive_event(score: float) -> float:
 
 def create_random_event(option: str, score: int):
     if option == "Positive":
-        positive_event(score)
+        score = positive_event(score)
     elif option == "Negative":
-        negative_event(score)
+        score = negative_event(score)
     else:
         print(f"Invalid option {option}! ")
         exit(-1)
+    return score
 
