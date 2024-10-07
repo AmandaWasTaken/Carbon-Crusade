@@ -1,6 +1,7 @@
 import time
 import gameplay
 import top5highscore
+import highscoreasettaminen
 from src.gameplay import startGameplayLoop
 
 # Usein toistuvia printtejä
@@ -26,7 +27,7 @@ def print_logo():
     return
 
 # Printtaa mainmenu vaihtoehdot ja ottaa pelaajan komennon
-def menu_selection(choices):
+def menu_selection(choices,user):
 
     print()
     for i in choices:
@@ -35,7 +36,7 @@ def menu_selection(choices):
     return menu_command
 
 # Testaa onko komento validi
-def is_command_in_menu(command,menu):
+def is_command_in_menu(command,menu,user):
 
     while command not in menu.keys():
         print(MENU_COMMAND_FALSE)
@@ -43,20 +44,20 @@ def is_command_in_menu(command,menu):
     return
 
 # Suorittaa main menu vaihtoehdoilla menu_selection(), sitten tarkistaa tuloksen ja toimii sen mukaisesti
-def command_to_main_menu_check(command):
+def command_to_main_menu_check(command, user):
 
-    is_command_in_menu(command, MAIN_MENU_CHOICES)
+    is_command_in_menu(command, MAIN_MENU_CHOICES,user)
 
     if command == "1":
-        command_to_difficulty(command)
+        command_to_difficulty(command,user)
     elif command == "2":
         top5highscore.get_top_scores()
-        command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
+        command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES,user),user)
     elif command == "3":
         print("CREDITS\n")
         for i in CREDITS:
             print(f":{i}:")
-        command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
+        command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES,user),user)
     elif command == "4":
         print("suljeetaan peliä...")
         time.sleep(1)
@@ -65,28 +66,29 @@ def command_to_main_menu_check(command):
     return
 
 # Suorittaa vaikeustaso vaihtoehdoilla menu_selection(), sitten tarkistaa tuloksen ja toimii sen mukaisesti
-def command_to_difficulty(command):
+def command_to_difficulty(command,user):
 
-    command = menu_selection(DIFFICULTIES)
-    is_command_in_menu(command, DIFFICULTIES)
+    command = menu_selection(DIFFICULTIES,user)
+    is_command_in_menu(command, DIFFICULTIES,user)
 
     if command == "1":
-        startGameplayLoop(1)
+        score = startGameplayLoop(1)
     elif command == "2":
-        startGameplayLoop(2)
+        score = startGameplayLoop(2)
     elif command == "3":
-        startGameplayLoop(3)
+        score = startGameplayLoop(3)
     elif command == "4":
         print_logo()
-        command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
+
+    command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES,user),user)
 
     return
 
 # Suorittaa koko main menu koodin
-def run_main_menu():
+def run_main_menu(user):
     print_logo()
-    command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
+    command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES,user),user)
 
-if __name__ == "__main__":
-    print_logo()
-    command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
+# if __name__ == "__main__":
+#     print_logo()
+#     command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))

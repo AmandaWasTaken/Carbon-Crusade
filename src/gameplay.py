@@ -2,7 +2,7 @@ import random
 import time
 
 import airportlogic
-import randomevents2 as randomevents
+import randomevents
 
 def printCurrentAirport(airport_name):
     print(f"Olet tällä hetkellä lentokentällä {airport_name}. Missä maassa kyseinen lentokenttä sijaitsee?")
