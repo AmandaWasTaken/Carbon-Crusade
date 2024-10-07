@@ -43,6 +43,7 @@ def create_account():
 
     cursor.execute(sql)
     res = cursor.fetchall()
+    return new_username
 
 # Funktio hoitaa käyttäjän sisäänkirjautumisen
 def login():
@@ -71,3 +72,4 @@ def login():
         logged_in = True
         print(f"Welcome, {username}")
         break
+    return username

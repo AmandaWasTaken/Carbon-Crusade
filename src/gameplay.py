@@ -2,6 +2,7 @@ import random
 import time
 
 import airportlogic
+import randomevents
 
 def printCurrentAirport(airport_name):
     print(f"Olet tällä hetkellä lentokentällä {airport_name}. Missä maassa kyseinen lentokenttä sijaitsee?")
@@ -131,6 +132,11 @@ def startGameplayLoop(difficulty):
             comparison = comparePlayerAnswer(player_answer, all_country_options, current_country[1])
             if comparison:
                 gained_score = playerGetsCorrectAnswer(current_country[1], all_country_options, wrong_countries[0])
+                roll_random_event = random.randint(1,100)
+                if roll_random_event <= 25:
+                    pos_or_neg_choice = random.randint(1,2)
+                    pos_or_neg = ("Positive","Negative")
+                    gained_score = randomevents.create_random_event(pos_or_neg[pos_or_neg_choice-1], gained_score)
                 score += gained_score
                 turns_left -= 1
                 break

@@ -1,18 +1,30 @@
-import mysql.connector
+import databases as db
 
-connection = mysql.connector.connect(
-    host='localhost',
-    port=3306,
-    database='hctest2',
-    user='root',
-    password='k0ira',
-    autocommit=True,
-)
+def get_user_info (user):
+    if db.conn.is_connected():
+        cursor = db.conn.cursor()
+        cursor.execute("""
+        select game.id, goal.id
+        from game
+        inner join score on game.id = game_id
+        inner join goal on goal.id = goal_id
+        where screen_name = %s
+        """, (user,))
+        results = cursor.fetchall()
+        return results
 
-def set_highscore(game_id, goal_id):
+def set_highscore(game_id, goal_id, score, user):
     try:
-        if connection.is_connected():
-            cursor = connection.cursor()
+        if db.conn.is_connected():
+            cursor = db.conn.cursor()
+            cursor.execute("""
+            update game
+            set co2_consumed = score
+            where screen_name = user
+            """, (score,user))
+
+        if db.conn.is_connected():
+            cursor = db.conn.cursor()
             cursor.execute("""
                 SELECT co2_consumed
                 FROM game
@@ -48,7 +60,7 @@ def set_highscore(game_id, goal_id):
                             SET highscore = %s
                             WHERE id = %s
                         """, (co2_consumed, goal_id))
-                        connection.commit()
+                        db.conn.commit()
                         print(f"High score päivitetty id:lle {goal_id} perustuen id:n {game_id} co2_consumediin")
                     else:
                         print(f"co2_consumed ei ole korkeampi kuin tämän hetkinen high score id:lla {goal_id}")
@@ -57,8 +69,8 @@ def set_highscore(game_id, goal_id):
             else:
                 print(f"Ei käyttäjää id:lla {game_id}")
     finally:
-        if connection.is_connected():
+        if db.conn.is_connected():
             cursor.close()
-            connection.close()
+            db.conn.close()
 
-set_highscore(1, 1)
+print(get_user_info("teppo"))

@@ -9,15 +9,15 @@ def main() -> None:
     while True:
         select = input("Syötä 1 jos haluat luoda käyttäjän, 2 jos haluat kirjautua sisään. ")
         if select == "1":
-            create_account()
+            user = create_account()
             break
         elif select == "2":
-            login()
+            user = login()
             break
         else:
             print("Virheellinen syöte, yritä uudestaan.")
 
-    run_main_menu()
+    run_main_menu(user)
 
 
 if __name__ == '__main__':
