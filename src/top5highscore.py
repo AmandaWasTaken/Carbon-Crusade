@@ -27,4 +27,3 @@ def get_top_scores():
         cursor.close()
         databases.conn.close()
 
-get_top_scores()
