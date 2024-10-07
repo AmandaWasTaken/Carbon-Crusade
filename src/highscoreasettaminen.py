@@ -1,5 +1,17 @@
 import databases as db
 
+def get_user_info (user):
+    if db.conn.is_connected():
+        cursor = db.conn.cursor()
+        cursor.execute("""
+        select game.id, goal.id
+        from game
+        inner join score on game.id = game_id
+        inner join goal on goal.id = goal_id
+        where screen_name = %s
+        """, (user,))
+        results = cursor.fetchall()
+        return results
 
 def set_highscore(game_id, goal_id, score, user):
     try:
@@ -60,3 +72,5 @@ def set_highscore(game_id, goal_id, score, user):
         if db.conn.is_connected():
             cursor.close()
             db.conn.close()
+
+print(get_user_info("teppo"))
