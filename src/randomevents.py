@@ -21,20 +21,6 @@ def negative_event(score: float):
 def positive_event(score: float) -> float:
 
     event = randint(1,3)
-    '''
-    match event:
-        case 1:
-            print("Lentokone on viallinen ja saat tuplapäästöt ")
-            score *= 2
-        case 2:
-            print("lentokoneesi on lähes täysin buukattu amerikkalaisen matkailuyrityksen toimesta. lennon päästöt ovat 50% korkeammat")
-            score += score*1.5
-        case 3:
-            print("lentokentällä on myöhästymisiä ja lentokone joutuu kiertämään ilmassa ylimääräisen tunnin. lennon päästöt ovat 10% korkeammat")
-            score = score*1.1
-        case _: 
-            pass
-'''
     if event == 1:
         print("Lentokone on viallinen ja saat tuplapäästöt ")
         score *= 2
