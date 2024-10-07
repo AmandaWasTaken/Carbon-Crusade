@@ -1,6 +1,3 @@
-###         Jos haluutte testailla näitä nii lisätkää vaikka tän filun 
-###         pohjaan ku näitä ei viel kutsuta missään
-
 import databases as db
 import re
 cursor = db.conn.cursor()
@@ -50,6 +47,7 @@ def create_account():
 # Funktio hoitaa käyttäjän sisäänkirjautumisen
 def login():
 
+    logged_in = False
     while True:
         username = input("Input your username: ")
         username_check  = f'SELECT * FROM game WHERE screen_name="{username}"'
@@ -70,5 +68,6 @@ def login():
             print("Login Failed! (Wrong password) ")
             continue
 
+        logged_in = True
         print(f"Welcome, {username}")
         break
