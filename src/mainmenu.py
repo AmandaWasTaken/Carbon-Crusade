@@ -1,5 +1,6 @@
 import time
 import gameplay
+import top5highscore
 from src.gameplay import startGameplayLoop
 
 # Usein toistuvia printtejä
@@ -27,6 +28,7 @@ def print_logo():
 # Printtaa mainmenu vaihtoehdot ja ottaa pelaajan komennon
 def menu_selection(choices):
 
+    print()
     for i in choices:
         print(i, choices[i])
     menu_command = input(MENU_COMMAND_INSTRUCTIONS)
@@ -48,11 +50,13 @@ def command_to_main_menu_check(command):
     if command == "1":
         command_to_difficulty(command)
     elif command == "2":
-        print("highscore placeholder")
+        top5highscore.get_top_scores()
+        command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
     elif command == "3":
         print("CREDITS\n")
         for i in CREDITS:
             print(f":{i}:")
+        command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
     elif command == "4":
         print("suljeetaan peliä...")
         time.sleep(1)
