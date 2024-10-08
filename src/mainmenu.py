@@ -72,11 +72,17 @@ def command_to_difficulty(command,user):
     is_command_in_menu(command, DIFFICULTIES,user)
 
     if command == "1":
-        score = startGameplayLoop(1)
+        score, used_difficulty = startGameplayLoop(1)
+        user_info1, user_info2 = highscoreasettaminen.get_user_info(user)
+        highscoreasettaminen.set_highscore(user_info1,user_info2,score,user)
     elif command == "2":
-        score = startGameplayLoop(2)
+        score, used_difficulty = startGameplayLoop(2)
+        user_info1, user_info2 = highscoreasettaminen.get_user_info(user)
+        highscoreasettaminen.set_highscore(user_info1, user_info2, score, user)
     elif command == "3":
-        score = startGameplayLoop(3)
+        score, used_difficulty = startGameplayLoop(3)
+        user_info1, user_info2 = highscoreasettaminen.get_user_info(user)
+        highscoreasettaminen.set_highscore(user_info1, user_info2, score, user)
     elif command == "4":
         print_logo()
 
@@ -90,5 +96,5 @@ def run_main_menu(user):
     command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES,user),user)
 
 # if __name__ == "__main__":
-#     print_logo()
-#     command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES))
+    # print_logo()
+    # command_to_main_menu_check(menu_selection(MAIN_MENU_CHOICES,"juho"),"juho")

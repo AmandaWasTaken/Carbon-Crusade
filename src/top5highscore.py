@@ -20,10 +20,16 @@ def get_top_scores():
             print("Ei löytynyt scoreja")
         else:
             print("Top 5 Scoret:")
+            tulostus1, tulostus2 = ("Pelaaja:","High Score:")
+            sijoitus = 1
+            print(f"{tulostus1:23s}{tulostus2}")
             for row in results:
-                print(f"Pelaaja: {row[0]}, Goal ID: {row[1]}, High Score: {row[2]}")
+                score = row[2][0:-2]
+                print(f"{sijoitus}. {row[0]:20s}{score}")
+                sijoitus += 1
 
     finally:
-        cursor.close()
-        databases.conn.close()
+        # cursor.close()
+        # databases.conn.close()
+        pass
 
