@@ -11,17 +11,17 @@ def get_user_info (user):
         where screen_name = %s
         """, (user,))
         results = cursor.fetchall()
-        return results
+        return results[0]
 
-def set_highscore(game_id, goal_id, score, user):
+def set_highscore(game_id, goal_id, user_score, user_name):
     try:
         if db.conn.is_connected():
             cursor = db.conn.cursor()
             cursor.execute("""
             update game
-            set co2_consumed = score
-            where screen_name = user
-            """, (score,user))
+            set co2_consumed = %s
+            where screen_name = %s
+            """, (user_score,user_name))
 
         if db.conn.is_connected():
             cursor = db.conn.cursor()
@@ -61,16 +61,18 @@ def set_highscore(game_id, goal_id, score, user):
                             WHERE id = %s
                         """, (co2_consumed, goal_id))
                         db.conn.commit()
-                        print(f"High score päivitetty id:lle {goal_id} perustuen id:n {game_id} co2_consumediin")
+                        # print(f"High score päivitetty id:lle {goal_id} perustuen id:n {game_id} co2_consumediin")
+                        print(f"Sait uuden highscoren pisteillä {user_score:,.0f} !")
                     else:
-                        print(f"co2_consumed ei ole korkeampi kuin tämän hetkinen high score id:lla {goal_id}")
+                        # print(f"co2_consumed ei ole korkeampi kuin tämän hetkinen high score id:lla {goal_id}")
+                        print(f"Et saanut uutta highscorea.")
+
                 else:
                     print(f"Ei highscore id:lla {goal_id}")
             else:
                 print(f"Ei käyttäjää id:lla {game_id}")
     finally:
         if db.conn.is_connected():
-            cursor.close()
-            db.conn.close()
-
-print(get_user_info("teppo"))
+            # cursor.close()
+            # db.conn.close()
+            pass
