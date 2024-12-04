@@ -73,4 +73,4 @@ def set_highscore(game_id, goal_id, score, user):
             cursor.close()
             db.conn.close()
 
-print(get_user_info("teppo"))
+#print(get_user_info("teppo"))

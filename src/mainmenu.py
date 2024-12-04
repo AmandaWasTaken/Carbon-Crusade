@@ -1,7 +1,7 @@
 import time
 import gameplay
 import top5highscore
-import highscoreasettaminen
+#import highscoreasettaminen
 from src.gameplay import startGameplayLoop
 
 # Usein toistuvia printtejä
@@ -15,12 +15,12 @@ CREDITS = ("JUHO MOLIN", "TEPPO TOROPAINEN", "ATTE STEN", "AMANDA SANDELL", "JER
 
 # Printtaa pelin logon
 def print_logo():
-    print(""" ____           _                      
-/ ___|__ _ _ __| |__   ___  _ __       
+    print(""" ____            _                      
+/ ___|__ _ _ __ | |__   ___  _ __       
 | |   / _` | '__| '_ \\ / _ \\| '_ \\      
 | |__| (_| | |  | |_) | (_) | | | |     
-\\____\\__,_|_|  |_.__/ \\___/|_| |_|     
-/ ___|_ __ _   _ ___  __ _  __| | ___  
+\\____\\__,_ |_|  |_.__/ \\___/|_| |_|     
+/ ___|_ __ _   _ ___  __ _   __| | ___  
 | |   | '__| | | / __|/ _` |/ _` |/ _ \\ 
 | |___| |  | |_| \\__ \\ (_| | (_| |  __/ 
  \\____|_|   \\__,_|___/\\__,_|\\__,_|\\___|""")
