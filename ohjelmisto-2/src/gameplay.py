@@ -97,10 +97,10 @@ def playerGetsCorrectAnswer(current_country, remaining_countries, flight_options
 
 
 def startGameplayLoop(difficulty):
-
     game_running = True
     score = 0
     turns_left = 12
+    turn_modifier = 1
     difficulties = ("Helppo", "Normaali", "Vaikea")
     score_limits = (1000000, 2000000, 3000000)
 
@@ -111,10 +111,9 @@ def startGameplayLoop(difficulty):
     time.sleep(3)
 
     while game_running and turns_left > 0:
-        print(f"\nOlet aiheuttanut {score:,.0f}kg co2-päästöjä, kun sinulla on jäljellä {turns_left}kk aikaa.\n")
+        print(f"\nOlet aiheuttanut {score:,.0f}kg co2-päästöjä, kun sinulla on jäljellä {turns_left:.1f}kk aikaa.\n")
 
         current_country = airportlogic.randomAirport()
-
         wrong_countries = airportlogic.getGuesses(current_country[1], current_country[2])
 
         all_country_options = [current_country[1]]
@@ -130,23 +129,31 @@ def startGameplayLoop(difficulty):
             comparison = comparePlayerAnswer(player_answer, all_country_options, current_country[1])
             if comparison:
                 gained_score = playerGetsCorrectAnswer(current_country[1], all_country_options, wrong_countries[0])
-                roll_random_event = random.randint(1,100)
-                if roll_random_event <= 25:
-                    pos_or_neg_choice = random.randint(1,2)
-                    pos_or_neg = ("Positive","Negative")
-                    gained_score = randomevents.create_random_event(pos_or_neg[pos_or_neg_choice-1], gained_score)
+                roll_random_event = random.randint(1, 100)
+                if roll_random_event <= 25:  # 25% chance of a random event
+                    pos_or_neg_choice = random.randint(1, 2)
+                    pos_or_neg = ("Positive", "Negative")
+                    gained_score, event_turn_modifier = randomevents.create_random_event(
+                        pos_or_neg[pos_or_neg_choice - 1], gained_score, turn_modifier
+                    )
+                    turn_modifier = event_turn_modifier  # Update turn modifier if affected by the event
                 score += gained_score
-                turns_left -= 1
+                turns_left -= turn_modifier  # Apply turn modifier
+                turns_left = max(turns_left, 0)  # Ensure turns_left doesn't drop below 0
                 break
             elif attempt < 3:
                 print(
-                    f"\nVastauksesi on valitettavasti väärin. Sinulla on yrityksiä tälle kysymykselle jäljellä {3 - attempt} kpl.")
+                    f"\nVastauksesi on valitettavasti väärin. Sinulla on yrityksiä tälle kysymykselle jäljellä {3 - attempt} kpl."
+                )
                 all_country_options = removeWrongAnswers(all_country_options, wrong_countries[0], player_answer)
             else:
                 print(f"\nVastauksesi on valitettavasti väärin. Oikea vastaus on {current_country[1]}.")
                 print("Et valitettavasti saanut kerrytettyä yhtään co2-päästöjä tässä kuussa.")
                 turns_left -= 1
+                turns_left = max(turns_left, 0)
+
     print(f"Kiitos Carbon Crusaden pelaamisesta! Sait kerättyä itsellesi {score:,.0f}kg verran co2-päästöjä!")
     return (int(score), difficulty)
+
 
 #startGameplayLoop(1)
