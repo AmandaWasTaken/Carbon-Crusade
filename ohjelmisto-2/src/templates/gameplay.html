@@ -9,10 +9,10 @@
 </head>
 <body>
     <header>
-        <div>cc</div>
-        <div>TURNS:</div>
-        <div>SCORE:</div>
-        <div id="info" onclick="open_info()">i</div>
+       <div onclick="open_event()">cc</div>
+       <div>TURNS: <p id="turns">0</p></div>
+       <div>SCORE: <p id="score">0</p></div>
+       <div id="info" onclick="open_info()">i</div>
     </header>
 
     <div class="main-content">
@@ -33,12 +33,15 @@
     </div>
 
     <footer>
-        <div class="question">Kysymys?</div>
-        <div class="icons">
-            <img src="icon1.png" alt="Icon 1">
-            <img src="icon2.png" alt="Icon 2">
-            <img src="icon3.png" alt="Icon 3">
-        </div>
+    <div class="question">
+        <p>Which country is the given airport in?</p>
+        <p id="airport">Airport Name Here</p>
+    </div>
+    <div class="icons">
+        <img id="heart1" src="../Images/heart_full.svg" alt="Heart 1">
+        <img id="heart2" src="../Images/heart_full.svg" alt="Heart 2">
+        <img id="heart3" src="../Images/heart_full.svg" alt="Heart 3">
+    </div>
     </footer>
 
     <div id="overlay" onclick="close_info()"></div>
@@ -50,5 +53,12 @@
         <p>*To use lifelines click a lifeline button on the left, the lifeline will delete half of the answer options.</p>
         <button id="close-popup" onclick="close_info()">Close</button>
     </div>
+
+    <div id="event-overlay" onclick="close_event()"></div>
+    <div id="event-popup"></div>	
+    <p id="random-event"></p>
+    <button id="close-event-popup" onclick="close_event()">Close</button>
+    </div>
+
 </body>
 </html>

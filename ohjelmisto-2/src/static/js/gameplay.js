@@ -1,3 +1,23 @@
+function set_random_event(){
+	const popup = document.getElementById('random-event');
+	const event_desc = "asdasdas";
+	popup.innerHTML = event_desc;
+}
+
+function open_event(){
+  const eventPopup = document.getElementById('event-popup');
+  const overlay = document.getElementById('event-overlay');
+  eventPopup.style.display = 'block';
+  overlay.style.display = 'block';
+}
+
+function close_event(){
+  const eventPopup = document.getElementById('event-popup');
+  const overlay = document.getElementById('event-overlay');
+  eventPopup.style.display = 'none';
+  overlay.style.display = 'none';
+}
+
 function open_info(){
   const infoPopup = document.getElementById('info-popup');
   const overlay = document.getElementById('overlay');
