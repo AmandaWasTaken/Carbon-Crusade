@@ -1,23 +1,3 @@
-function set_random_event(){
-	const popup = document.getElementById('random-event');
-	const event_desc = "asdasdas";
-	popup.innerHTML = event_desc;
-}
-
-function open_event(){
-  const eventPopup = document.getElementById('event-popup');
-  const overlay = document.getElementById('event-overlay');
-  eventPopup.style.display = 'block';
-  overlay.style.display = 'block';
-}
-
-function close_event(){
-  const eventPopup = document.getElementById('event-popup');
-  const overlay = document.getElementById('event-overlay');
-  eventPopup.style.display = 'none';
-  overlay.style.display = 'none';
-}
-
 function open_info(){
   const infoPopup = document.getElementById('info-popup');
   const overlay = document.getElementById('overlay');
@@ -34,10 +14,26 @@ function close_info(){
 
 
 
-function button_click(answer_number){
-  const jotai = 0
-  // console.log(country_data)
+async function button_click(answer_number){
+  console.log(gameData)
+  const player_answer = answer_number - 1
+  const countries = gameData.all_country_options
+  const correct_answer = gameData.current_country
+  const response = await fetch('/compare_answer', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ player_answer, countries, correct_answer })
+  });
+  const data = await response.json();
+  console.log("done")
+  console.log(data)
 }
+
+
+let country_data
+let gameData
 
 async function get_new_question(){
   const response = await fetch('/get_new_countries');
@@ -48,10 +44,13 @@ async function get_new_question(){
     const btn = "button" + (i+1)
     document.getElementById(btn).innerHTML = countries[i]
   }
-  // return [data['all_country_options'], data['current_country'], data['wrong_countries']]
-  // console.log(data['all_country_options'])
-  return data['all_country_options']
+  // document.getElementById('data1').innerHTML = countries
+  return data
 }
-let country_data = get_new_question()
-console.log(get_new_question())
+
+document.addEventListener('DOMContentLoaded', async function() {
+    gameData = await get_new_question();
+    console.log("Stored game data:", gameData);
+    // someOtherFunction();
+});
 
