@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carbon Crusade</title>
-    <script src="gameplay.js" defer></script>
+    <script src="/ohjelmisto-2/src/gameplay.js" defer></script>
     <style>
         body {
             margin: 0;
@@ -100,6 +100,40 @@
             width: 40px;
             height: 40px;
         }
+
+        #info-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        #info-popup button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #1086ce;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
@@ -136,7 +170,7 @@
         </div>
     </footer>
 
- <div id="overlay"></div>
+    <div id="overlay"></div>
     <div id="info-popup">
         <p>Ohjeet</p>
         <p>Ohjeet</p>
