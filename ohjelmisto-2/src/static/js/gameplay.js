@@ -58,7 +58,7 @@ async function button_click(answer_number){
     // console.log(data.success)
     if (data.success === false){
       document.getElementById('button' + answer_number).classList = "button-disabled"
-      document.getElementById('button1').setAttribute("onclick", "")
+      document.getElementById('button' + answer_number).setAttribute("onclick", "")
     }
 
     if (data.success === true){
@@ -68,8 +68,9 @@ async function button_click(answer_number){
       open_event()
     }
   } else if (answer_number >= 7 && answer_number <= 12){
-    console.log("APUA")
+    // console.log("APUA")
     console.log(answer_number-6, gameData.wrong_countries[0], document.getElementById('turns').innerHTML, gameData.current_country[1])
+    console.log(gameData.all_country_options)
     console.log(gameData)
     const response = await fetch('/count_player_points', {
         method: 'POST',
@@ -77,13 +78,37 @@ async function button_click(answer_number){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          flight_destination: answer_number - 7,
-          country_options: gameData.wrong_countries[0],
+          flight_destination: answer_number - 6,
+          country_options: gameData.all_country_options,
+          wrong_countries: gameData.wrong_countries[0],
           turns_left: document.getElementById('turns').innerHTML })
     });
     const data = await response.json();
-    console.log("toimi")
+    // console.log("toimi")
     console.log(data)
+    if (data.did_event_happen === true){
+      const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!"
+      document.getElementById('random-event').innerHTML = content
+      open_event()
+      gameData = await get_new_question();
+      for (let i = 1; i < 7; i++){
+        // console.log("asd")
+        document.getElementById('button' + i).classList = "button"
+        document.getElementById('button' + i).setAttribute("onclick", "button_click("+i+")")
+      }
+    }
+    if (data.did_event_happen === false){
+      const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!"
+      document.getElementById('random-event').innerHTML = content
+      open_event()
+      gameData = await get_new_question();
+      for (let i = 1; i < 7; i++){
+        // console.log("asd")
+        document.getElementById('button' + i).classList = "button"
+        document.getElementById('button' + i).setAttribute("onclick", "button_click("+i+")")
+      }
+    }
+    //document.getElementById('random-event').innerHTML = ""
   }
 
 }

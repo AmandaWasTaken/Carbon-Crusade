@@ -188,9 +188,19 @@ def count_player_points():
 
     flight_destination = data.get('flight_destination')
     country_options = data.get('country_options')
+    wrong_countries = data.get('wrong_countries')
     turns_left = data.get('turns_left')
 
-    gained_score = country_options[flight_destination - 1][2] * 0.15 * 396
+    country_name = country_options[flight_destination - 1]
+    # gained_score = country_options[flight_destination - 1][2] * 0.15 * 396
+    country_index = 0
+    apumuuttuja = 0
+    for i in wrong_countries:
+        if country_name in i:
+            country_index = apumuuttuja
+            break
+        apumuuttuja += 1
+    gained_score = wrong_countries[country_index][2] * 0.15 * 396
     gained_score, turns_left, did_event_happen, event_text = roll_random_event(gained_score, turns_left)
 
     return jsonify ({
