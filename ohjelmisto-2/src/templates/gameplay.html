@@ -141,7 +141,7 @@
         <div style="color:#011e48">cc</div>
         <div style="color:#011e48">TURNS:</div>
         <div style="color:#011e48">SCORE:</div>
-        <div id="info">i</div>
+        <div id="info" onclick="open_info()">i</div>
     </header>
 
     <div class="main-content">
@@ -170,14 +170,14 @@
         </div>
     </footer>
 
-    <div id="overlay"></div>
+    <div id="overlay" onclick="close_info()"></div>
     <div id="info-popup">
         <p>Ohjeet</p>
         <p>Ohjeet</p>
         <p>Ohjeet</p>
         <p>Ohjeet</p>
         <p>Ohjeet</p>
-        <button id="close-popup">Close</button>
+        <button id="close-popup" onclick="close_info()">Close</button>
     </div>
 
 </body>
