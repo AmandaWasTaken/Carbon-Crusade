@@ -11,6 +11,10 @@ import json
 app = Flask(__name__)
 
 
+@app.route('/')
+def gameplay():
+    return render_template('gameplay.html')
+
 @app.route('/compare_answer', methods=['POST'])
 def compare_answer():
     data = request.get_json()
@@ -84,11 +88,15 @@ def get_new_countries():
         all_country_options.append(country[0])
     random.shuffle(all_country_options)
 
+
     # return all_country_options, current_country, wrong_countries
+    # return jsonify({
+    #     'all_country_options': all_country_options,
+    #     'current_country': current_country,
+    #     'wrong_countries': wrong_countries
+    # })
     return jsonify({
-        'all_country_options': all_country_options,
-        'current_country': current_country,
-        'wrong_countries': wrong_countries
+        'message': "hellou"
     })
 
 

@@ -19,8 +19,10 @@ function button_click(answer_number){
 }
 
 async function get_new_question(){
-  const response = await fetch('/get_new_countries');
+    const response = await fetch('/get_new_countries');
+    const data = await response.json();
+    console.log(data)
+    console.log("hello world")
 
-  const data = await response.json();
-  console.log(data)
+
 }
