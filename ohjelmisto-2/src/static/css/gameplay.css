@@ -62,7 +62,7 @@ header div {
 .center-grid button {
     padding: 2px;
     margin: 2px;
-    font-size: 32px;
+    font-size: 20px;
     width: 75%;
     height: 85px;
     background-color: #1086ce;
@@ -89,7 +89,7 @@ footer {
 
 .question {
     flex: 2;
-    font-size: 50pt;
+    font-size: 27px;
     color: #000;
 }
 
@@ -99,10 +99,33 @@ footer {
 }
 
 .icons img {
-    width: 40px;
-    height: 40px;
+    width: 64px;
+    height: 64px;
 }
 
+
+#info {
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid #011e48;
+    border-radius: 50%;
+    background-color: #1086ce;
+    color: #011e48;
+    font-size: 18px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+#info:hover {
+    background-color: #1557b0;
+    color: white;
+    border-color: white;
+}
 
 #info-popup {
     display: none;
@@ -142,3 +165,4 @@ footer {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+
