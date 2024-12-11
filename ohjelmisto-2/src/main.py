@@ -1,23 +1,24 @@
 import databases as db
-import accountlogic
+import accountlogic as al
 import mainmenu
-from src.accountlogic import create_account, login
-from src.mainmenu import run_main_menu
 
 
 def main() -> None:
+
+    user = al.Account()
+    username = None
     while True:
         select = input("Syötä 1 jos haluat luoda käyttäjän, 2 jos haluat kirjautua sisään. ")
         if select == "1":
-            user = create_account()
+            username = user.create_account()
             break
         elif select == "2":
-            user = login()
+            username = user.login()
             break
         else:
             print("Virheellinen syöte, yritä uudestaan.")
 
-    run_main_menu(user)
+    mainmenu.mainmenu()
 
 
 if __name__ == '__main__':

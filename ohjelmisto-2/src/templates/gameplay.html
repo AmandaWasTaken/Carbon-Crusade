@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Crusade</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+	    background-color: #242f4f;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+        }
+
+        .left-buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+	    background-color: #242f4f;
+            border-right: 1px solid #ccc;
+        }
+
+        .left-buttons button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 150px;
+	    background-color: #5d78c2;
+        }
+
+        .center-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 20px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .center-grid button {
+            padding: 15px;
+            font-size: 18px;
+            width: 100%;
+            height: 100px;
+	    background-color: #5d78c2;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background: #242f4f;
+	    padding-left: 150px;
+        }
+
+        .question {
+            flex: 2;
+            font-size: 20px;
+	    color: white;
+        }
+
+        .icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .icons img {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>cc</div>
+        <div style="color:white">TURNS</div>
+        <div style="color:white">SCORE</div>
+        <div>ℹ️</div>
+    </header>
+
+    <div class="main-content">
+        <div class="left-buttons">
+            <button>OLJ.</button>
+            <button>OLJ.</button>
+            <button>OLJ.</button>
+        </div>
+
+        <div class="center-grid">
+            <button>Vastaus 1</button>
+            <button>Vastaus 2</button>
+            <button>Vastaus 3</button>
+            <button>Vastaus 4</button>
+            <button>Vastaus 5</button>
+            <button>Vastaus 6</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="question">Kysymys?</div>
+        <div class="icons">
+            <img src="icon1.png" alt="Icon 1">
+            <img src="icon2.png" alt="Icon 2">
+            <img src="icon3.png" alt="Icon 3">
+        </div>
+    </footer>
+</body>
+</html>

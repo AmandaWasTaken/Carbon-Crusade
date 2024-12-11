@@ -98,8 +98,6 @@ def playerGetsCorrectAnswer(current_country, remaining_countries, flight_options
 
 def startGameplayLoop(difficulty):
 
-    print(f"{difficulty}")
-
     game_running = True
     score = 0
     turns_left = 12
@@ -149,6 +147,6 @@ def startGameplayLoop(difficulty):
                 print("Et valitettavasti saanut kerrytettyä yhtään co2-päästöjä tässä kuussa.")
                 turns_left -= 1
     print(f"Kiitos Carbon Crusaden pelaamisesta! Sait kerättyä itsellesi {score:,.0f}kg verran co2-päästöjä!")
-    return (score, difficulty)
+    return (int(score), difficulty)
 
 #startGameplayLoop(1)
