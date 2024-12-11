@@ -1,0 +1,144 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #c9e8fd;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #1086ce;
+}
+
+header div {
+    color: #011e48;
+}
+
+
+.main-content {
+    flex: 1;
+    display: flex;
+}
+
+.left-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    background-color: #8fc8f3;
+}
+
+.left-buttons button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 175px;
+    background-color: #1086ce;
+    border: none;
+    border-radius: 3px;
+    color: #011e48;
+    height: 75px;
+}
+
+.center-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    padding: 1px;
+    align-items: center;
+    justify-items: center;
+    height: 50%;
+    margin-top: 100px;
+    column-gap: -10px;
+}
+
+.center-grid button {
+    padding: 2px;
+    margin: 2px;
+    font-size: 32px;
+    width: 75%;
+    height: 85px;
+    background-color: #1086ce;
+    color: #011e48;
+}
+
+button:hover {
+    background-color: #1557b0;
+    border: 2px solid #000;
+    transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #1086ce;
+    padding-left: 150px;
+    height: 100px;
+    color: #011e48;
+}
+
+.question {
+    flex: 2;
+    font-size: 50pt;
+    color: #000;
+}
+
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icons img {
+    width: 40px;
+    height: 40px;
+}
+
+
+#info-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+#info-popup p {
+    margin: 0;
+}
+
+#info-popup button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #1086ce;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
