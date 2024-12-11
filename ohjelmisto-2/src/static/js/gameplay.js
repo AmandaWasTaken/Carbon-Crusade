@@ -31,6 +31,7 @@ async function button_click(answer_number){
   console.log(data)
 }
 
+
 let country_data
 let gameData
 
