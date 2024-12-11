@@ -11,7 +11,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-	    background-color: #222831;
+	    background-color: #c9e8fd;
         }
 
         header {
@@ -19,8 +19,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px;
-            border-bottom: 1px solid #EEE;
-	    background-color: #393E46;
+	    background-color: #224d84;
         }
 
         .main-content {
@@ -33,16 +32,16 @@
             flex-direction: column;
             justify-content: center;
             padding: 10px;
-	    background-color: #222831;
-            border-right: 1px solid #EEE;
+	    background-color: #8fc8f3;
         }
 
         .left-buttons button {
             margin: 10px 0;
             padding: 10px;
             width: 150px;
-	    background-color: #00ADB5;
-	    border: 1px solid black;
+	    background-color: #1086ce;
+	    border: none; 
+	    border-radius: 3px; 
         }
 
         .center-grid {
@@ -65,17 +64,19 @@
             font-size: 18px;
             width: 75%;
             height: 50px;
-	    background-color: #00ADB5;
-	    border: 1px solid black;
+	    background-color: #1086ce;
         }
+	button:hover{
+		background-color: #1557b0;
+		border: 2px solid #000;
+	}
 
         footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px;
-            border-top: 1px solid #EEE;
-            background: #393E46;
+            background: #224d84;
 	    padding-left: 150px;
 	    height: 100px;
         }
@@ -83,7 +84,7 @@
         .question {
             flex: 2;
             font-size: 32px;
-	    color: #EEEEEE;
+	    color: #000;
         }
 
         .icons {
@@ -100,25 +101,25 @@
 <body>
     <header>
         <div>cc</div>
-        <div style="color:#EEEEEE">TURNS</div>
-        <div style="color:#EEEEEE">SCORE</div>
-        <div>ℹ️</div>
+        <div style="color:#000">TURNS:</div>
+        <div style="color:#000">SCORE:</div>
+        <div id="info">i</div>
     </header>
 
     <div class="main-content">
         <div class="left-buttons">
-            <button>OLJ.</button>
-            <button>OLJ.</button>
-            <button>OLJ.</button>
+            <button id="olj1">OLJ.</button>
+            <button id="olj2">OLJ.</button>
+            <button id="olj3">OLJ.</button>
         </div>
 
         <div class="center-grid">
-            <button>Vastaus 1</button>
-            <button>Vastaus 2</button>
-            <button>Vastaus 3</button>
-            <button>Vastaus 4</button>
-            <button>Vastaus 5</button>
-            <button>Vastaus 6</button>
+            <button id="button1">Vastaus 1</button>
+            <button id="button2">Vastaus 2</button>
+            <button id="button3">Vastaus 3</button>
+            <button id="button4">Vastaus 4</button>
+            <button id="button5">Vastaus 5</button>
+            <button id="button6">Vastaus 6</button>
         </div>
     </div>
 
