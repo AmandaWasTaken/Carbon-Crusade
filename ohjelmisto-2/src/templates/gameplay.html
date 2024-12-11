@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-       <div>cc</div>
+       <div onclick="open_event()">cc</div>
        <div>TURNS: <p id="turns">0</p></div>
        <div>SCORE: <p id="score">0</p></div>
        <div id="info" onclick="open_info()">i</div>
@@ -53,5 +53,12 @@
         <p>*To use lifelines click a lifeline button on the left, the lifeline will delete half of the answer options.</p>
         <button id="close-popup" onclick="close_info()">Close</button>
     </div>
+
+    <div id="event-overlay" onclick="close_event()"></div>
+    <div id="event-popup"></div>	
+    <p id="random-event"></p>
+    <button id="close-event-popup" onclick="close_event()">Close</button>
+    </div>
+
 </body>
 </html>
