@@ -13,7 +13,7 @@ async function loadHighScores() {
         const scores = await response.json();
 
         const tbody = document.getElementById('highScoresBody');
-        tbody.innerHTML = ''; // Clear existing scores
+        tbody.innerHTML = '';
 
         scores.forEach((score, index) => {
             const row = document.createElement('tr');
@@ -33,7 +33,7 @@ function toggleHighScores() {
     const section = document.getElementById('highScoresSection');
     if (section.style.display === 'none') {
         section.style.display = 'block';
-        loadHighScores(); // Refresh scores when showing
+        loadHighScores();
     } else {
         section.style.display = 'none';
     }
@@ -43,8 +43,7 @@ function showDifficultySelector() {
     const modal = document.getElementById('difficultyModal');
     modal.style.display = 'flex';
 }
-
-function closeDifficultyModal() {
+function closeDifficultySelector() {
     const modal = document.getElementById('difficultyModal');
     modal.style.display = 'none';
 }
@@ -58,11 +57,11 @@ function showCredits() {
     const modal = document.getElementById('creditsModal');
     modal.style.display = 'flex';
 }
-
 function closeCreditsModal() {
     const modal = document.getElementById('creditsModal');
     modal.style.display = 'none';
 }
+
 
 function closeGame() {
     const confirmClose = confirm("Are you sure you want to exit the game?");
