@@ -69,9 +69,9 @@ async function button_click(answer_number){
     }
   } else if (answer_number >= 7 && answer_number <= 12){
     // console.log("APUA")
-    console.log(answer_number-6, gameData.wrong_countries[0], document.getElementById('turns').innerHTML, gameData.current_country[1])
-    console.log(gameData.all_country_options)
-    console.log(gameData)
+    // console.log(answer_number-6, gameData.wrong_countries[0], document.getElementById('turns').innerHTML, gameData.current_country[1])
+    // console.log(gameData.all_country_options)
+    // console.log(gameData)
     const response = await fetch('/count_player_points', {
         method: 'POST',
         headers: {
@@ -85,7 +85,7 @@ async function button_click(answer_number){
     });
     const data = await response.json();
     // console.log("toimi")
-    console.log(data)
+    // console.log(data)
     if (data.did_event_happen === true){
       const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!"
       document.getElementById('random-event').innerHTML = content
