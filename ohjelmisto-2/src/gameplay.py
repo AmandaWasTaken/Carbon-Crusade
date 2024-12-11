@@ -76,8 +76,8 @@ def roll_random_event(score, turns):
         did_event_happen = True
     return new_score, new_turns, did_event_happen, event_text
 
-
-@app.route('/get_new_countries', methods=['POST'])
+#, methods=['POST']
+@app.route('/get_new_countries')
 def get_new_countries():
     current_country = airportlogic.randomAirport()
 
@@ -90,14 +90,14 @@ def get_new_countries():
 
 
     # return all_country_options, current_country, wrong_countries
-    # return jsonify({
-    #     'all_country_options': all_country_options,
-    #     'current_country': current_country,
-    #     'wrong_countries': wrong_countries
-    # })
     return jsonify({
-        'message': "hellou"
+        'all_country_options': all_country_options,
+        'current_country': current_country,
+        'wrong_countries': wrong_countries
     })
+    # return jsonify({
+    #     'message': "hellou"
+    # })
 
 
 if __name__ == '__main__':
