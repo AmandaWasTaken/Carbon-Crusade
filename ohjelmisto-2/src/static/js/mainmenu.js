@@ -43,8 +43,7 @@ function showDifficultySelector() {
     const modal = document.getElementById('difficultyModal');
     modal.style.display = 'flex';
 }
-
-function closeDifficultyModal() {
+function closeDifficultySelector() {
     const modal = document.getElementById('difficultyModal');
     modal.style.display = 'none';
 }
@@ -58,11 +57,11 @@ function showCredits() {
     const modal = document.getElementById('creditsModal');
     modal.style.display = 'flex';
 }
-
 function closeCreditsModal() {
     const modal = document.getElementById('creditsModal');
     modal.style.display = 'none';
 }
+
 
 function closeGame() {
     const confirmClose = confirm("Are you sure you want to exit the game?");
