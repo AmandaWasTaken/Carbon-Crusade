@@ -17,9 +17,6 @@ def check_reserved(value_to_check: str) -> bool:
         return False
     return True
 
-@app.route('/')
-def index():
-    return render_template('secret_login_page.html')
 
 @app.route('/create_account', methods=['POST'])
 def create_account():
