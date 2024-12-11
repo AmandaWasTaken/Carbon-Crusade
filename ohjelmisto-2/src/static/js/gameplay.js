@@ -35,10 +35,59 @@ function close_info(){
 
 
 
-function button_click(answer_number){
-  const jotai = 0
-  // console.log(country_data)
+async function button_click(answer_number){
+  if (answer_number >= 1 && answer_number <= 6){
+    // console.log(gameData)
+    const player_answer = answer_number - 1
+    const countries = gameData.all_country_options
+    const correct_answer = gameData.current_country[1];
+    const response = await fetch('/compare_answer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          player_answer: player_answer,
+          country_options: countries,
+          correct_country: correct_answer })
+    });
+    const data = await response.json();
+
+    // console.log(data)
+    // console.log("done")
+    // console.log(data.success)
+    if (data.success === false){
+      document.getElementById('button' + answer_number).classList = "button-disabled"
+      document.getElementById('button1').setAttribute("onclick", "")
+    }
+
+    if (data.success === true){
+      document.getElementById('random-event').innerHTML = "Correct!<br>Now choose where you want to fly."
+      document.getElementById('button1').setAttribute("onclick", "button_click(7)")
+      // console.log("asd")
+      open_event()
+    }
+  } else if (answer_number >= 7 && answer_number <= 12){
+    console.log("APUA")
+    console.log(answer_number-6, gameData.all_country_options, gameData.current_country[1])
+    const response = await fetch('/count_player_points', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          flight_destination: answer_number - 7,
+          country_options: gameData.all_country_options,
+          correct_country: gameData.current_country[1] })
+    });
+    const data = await response.json();
+  }
+
 }
+
+
+let country_data
+let gameData
 
 async function get_new_question(){
   const response = await fetch('/get_new_countries');
@@ -49,10 +98,12 @@ async function get_new_question(){
     const btn = "button" + (i+1)
     document.getElementById(btn).innerHTML = countries[i]
   }
-  // return [data['all_country_options'], data['current_country'], data['wrong_countries']]
-  // console.log(data['all_country_options'])
-  return data['all_country_options']
+  document.getElementById('airport').innerHTML = data.current_country[0]
+  return data
 }
-let country_data = get_new_question()
-console.log(get_new_question())
 
+document.addEventListener('DOMContentLoaded', async function() {
+    gameData = await get_new_question();
+    console.log("Stored game data:", gameData);
+    // someOtherFunction();
+});

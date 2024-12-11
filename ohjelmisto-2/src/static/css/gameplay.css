@@ -60,7 +60,7 @@ header div {
     column-gap: -10px;
 }
 
-.center-grid button {
+.center-grid .button {
     padding: 2px;
     margin: 2px;
     font-size: 20px;
@@ -70,7 +70,17 @@ header div {
     color: #011e48;
 }
 
-button:hover {
+.center-grid .button-disabled {
+    padding: 2px;
+    margin: 2px;
+    font-size: 20px;
+    width: 75%;
+    height: 85px;
+    background-color: gray;
+    color: #011e48;
+}
+
+.button:hover {
     background-color: #1557b0;
     border: 2px solid #000;
     transition: background-color 0.3s ease, border 0.3s ease;
