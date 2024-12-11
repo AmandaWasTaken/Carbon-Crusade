@@ -38,7 +38,7 @@ function close_info(){
 async function button_click(answer_number){
   if (answer_number >= 1 && answer_number <= 6){
     // console.log(gameData)
-    const player_answer = answer_number - 1
+    const player_answer = answer_number
     const countries = gameData.all_country_options
     const correct_answer = gameData.current_country[1];
     const response = await fetch('/compare_answer', {
@@ -69,7 +69,8 @@ async function button_click(answer_number){
     }
   } else if (answer_number >= 7 && answer_number <= 12){
     console.log("APUA")
-    console.log(answer_number-6, gameData.all_country_options, gameData.current_country[1])
+    console.log(answer_number-6, gameData.wrong_countries[0], document.getElementById('turns').innerHTML, gameData.current_country[1])
+    console.log(gameData)
     const response = await fetch('/count_player_points', {
         method: 'POST',
         headers: {
@@ -77,10 +78,12 @@ async function button_click(answer_number){
         },
         body: JSON.stringify({
           flight_destination: answer_number - 7,
-          country_options: gameData.all_country_options,
-          correct_country: gameData.current_country[1] })
+          country_options: gameData.wrong_countries[0],
+          turns_left: document.getElementById('turns').innerHTML })
     });
     const data = await response.json();
+    console.log("toimi")
+    console.log(data)
   }
 
 }
