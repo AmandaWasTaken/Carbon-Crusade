@@ -112,61 +112,30 @@ def login():
 def main_menu():
     return render_template('mainmenu_page.html')
 
-@app.route('/api/game', methods=['POST'])
-def handle_game_action():
-    data = request.get_json()
-    action = data.get('action')
-    user = data.get('user')
+@app.route('/get_high_scores')
+def get_high_scores_route():
+    cursor = db.conn.cursor()
+    query = """
+        SELECT game.screen_name, goal.id AS goal_id, goal.highscore
+        FROM score
+        INNER JOIN game ON game.id = score.game_id
+        INNER JOIN goal ON goal.id = score.goal_id
+        ORDER BY goal.highscore DESC
+        LIMIT 5;
+    """
+    cursor.execute(query)
+    results = cursor.fetchall()
 
-    if not user:
-        return jsonify({
-            'success': False,
-            'message': 'User not authenticated'
-        }), 401
+    scores = [
+        {
+            'screen_name': row[0],
+            'goal_id': row[1],
+            'highscore': row[2]
+        }
+        for row in results
+    ]
 
-    return jsonify({
-        'success': True,
-        'message': 'Action received'
-    })
-
-@app.route('/api/game/start', methods=['POST'])
-def start_game():
-    data = request.get_json()
-    user = data.get('user')
-    difficulty = data.get('difficulty')
-
-    if not user:
-        return jsonify({
-            'success': False,
-            'message': 'User not authenticated'
-        }), 401
-
-    try:
-        #game logic
-        return jsonify({
-            'success': True,
-            'message': 'Game started'
-        })
-    except Exception as e:
-        return jsonify({
-            'success': False,
-            'message': str(e)
-        }), 500
-
-@app.route('/api/highscores', methods=['GET'])
-def get_highscores():
-    try:
-        #highscores
-        scores = top5highscore.get_top_scores()
-        return jsonify({
-            'success': True,
-            'scores': scores
-        })
-    except Exception as e:
-        return jsonify({
-            'success': False,
-            'message': str(e)
-        }), 500
+    return jsonify(scores)
 
 
 if __name__ == '__main__':

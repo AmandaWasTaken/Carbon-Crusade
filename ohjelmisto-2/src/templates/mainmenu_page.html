@@ -4,33 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Menu</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainmenu.css') }}">
+    <link rel="stylesheet" href=./static/css/mainmenu.css">
 </head>
 <body>
     <div class="container">
-        <div class="menu-logo">
-            <pre class="ascii-art">
- ____            _
-/ ___|__ _ _ __ | |__   ___  _ __
-| |   / _` | '__| '_ \ / _ \| '_ \
-| |__| (_| | |  | |_) | (_) | | | |
-\____\__,_|_|  |_.__/ \___/|_| |_|
-/ ___|_ __ _   _ ___  __ _   __| | ___
-| |   | '__| | | / __|/ _` |/ _` |/ _ \
-| |___| |  | |_| \__ \ (_| | (_| |  __/
- \____|_|   \__,_|___/\__,_|\__,_|\___|
-            </pre>
+        <h1>Carbon Crusade</h1>
+
+        <div class="welcome-message">
+            Welcome back, <span id="username">Player</span>!
         </div>
 
-        <div class="menu-options">
-            <button class="menu-button" onclick="startGame()">ALOITA PELI</button>
-            <button class="menu-button" onclick="showHighScores()">HIGHSCORET</button>
-            <button class="menu-button" onclick="showCredits()">CREDITS</button>
-            <button class="menu-button logout" onclick="logout()">SULJE PELI</button>
+        <div class="menu-buttons">
+            <div class="menu-item" onclick="showDifficultySelector()">
+                <h3>Start Game</h3>
+            </div>
+            <div class="menu-item" onclick="toggleHighScores()">
+                <h3>High Scores</h3>
+            </div>
+            <div class="menu-item" onclick="showCredits()">
+                <h3>Credits</h3>
+            </div>
+            <div class="menu-item" onclick="closeGame()">
+                <h3>Close Game</h3>
+            </div>
         </div>
 
-        <div id="messageArea" class="message-area"></div>
+
+        <div id="highScoresSection" class="high-scores-section" style="display: none;">
+            <h2>Top 5 High Scores</h2>
+            <table class="high-scores-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id="highScoresBody">
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <div id="difficultyModal" class="modal">
+            <div class="modal-content">
+                <h2>Select Difficulty</h2>
+                <div class="difficulty-buttons">
+                    <button onclick="startGame(1)">Easy </button>
+                    <button onclick="startGame(2)">Medium </button>
+                    <button onclick="startGame(3)">Hard </button>
+                </div>
+                <button class="secondary" onclick="closeDifficultyModal()">Cancel</button>
+            </div>
+        </div>
+
+
+        <div id="creditsModal" class="modal">
+            <div class="modal-content">
+                <h2>Credits</h2>
+                <div class="credits-content">
+                    <p>Juho Molin</p>
+                    <p>Amanda Sandell</p>
+                    <p>Atte Sten</p>
+                    <p>Teppo Toropainen</p>
+                    <p>Jere Punnonen</p>
+                </div>
+                <button onclick="closeCreditsModal()">Close</button>
+            </div>
+        </div>
+
+        <div id="message" class="message"></div>
     </div>
-    <script src="{{ url_for('static', filename='js/mainmenu.js') }}"></script>
+    <script src="./static/js/mainmenu.js"></script>
 </body>
 </html>
