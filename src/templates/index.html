@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Game Portal</h1>
+
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('register')">Register</div>
+            <div class="tab" onclick="switchTab('login')">Login</div>
+        </div>
+
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+                <div class="requirements">Must be at least 3 characters long</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+                <div class="requirements">
+                    - At least 6 characters long<br>
+                    - Must contain at least one uppercase letter<br>
+                    - Must contain at least one number<br>
+                    - No spaces allowed
+                </div>
+            </div>
+
+            <button type="button" onclick="createAccount()">Create Account</button>
+            <div id="registerMessage" class="message"></div>
+        </form>
+
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" required>
+            </div>
+
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+
+            <button type="button" onclick="login()">Login</button>
+            <div id="loginMessage" class="message"></div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>
