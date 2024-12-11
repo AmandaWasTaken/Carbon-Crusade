@@ -174,3 +174,7 @@ button.secondary:hover {
     border-radius: 5px;
     text-align: center;
 }
+
+.logo {
+	margin-left: 115px;
+}
