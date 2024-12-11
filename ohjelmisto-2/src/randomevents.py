@@ -8,19 +8,19 @@ def negative_event(score: float) -> (float, int, str):
     event_text = ""
 
     if event == 1:
-        event_text = "uusi sääntely vaikeuttaa lentämistä, mikä hidastaa reittejä. Yksi vuoro kestää 2 kuukautta."
+        event_text = "A new regulation will make flying more difficult and slow down routes. One flight takes 2 months."
         turn_modifier -= 1
     elif event == 2:
-        event_text = "lentokoneyhtiöllä on tekninen ongelma. Yksi vuoro vie 3 kuukautta."
+        event_text = "The airline has a technical problem. One flight takes 3 months."
         turn_modifier -= 2
     elif event == 3:
-        event_text = "yllättävä lakko pakottaa sinut perumaan lentoja. Lentopäästöt vähenevät 40%."
+        event_text = "The flight was not fully booked. Emissions are reduced by 40%."
         score *= 0.6
     elif event == 4:
-        event_text = "lentoyhtiölläsi on testissä uusi polttoaine, jonka päästöt ovat 20% pienemmät kuin aiemman"
+        event_text = "The airline is testing a new fuel with 20% lower emissions than the previous one."
         score *= 0.8
     elif event == 5:
-        event_text = "ukkosmyrsky tekee lentämisestä vaarallista. Vuoro kestää 1.5 kuukautta."
+        event_text = "A sudden thunderstorm makes flying dangerous. The turn lasts 1.5 months."
         turn_modifier -= 1.5
 
     return score, turn_modifier, event_text
@@ -32,19 +32,19 @@ def positive_event(score: float) -> (float, int, str):
     event_text = ""
 
     if event == 1:
-        event_text = "sääolosuhteet ovat ihanteelliset, ja lentosi kestävät vähemmän aikaa. Vuoro kestää vain 0.5 kuukautta."
+        event_text = "Weather conditions are ideal and your flights take less time. The turn takes only 0.5 months."
         turn_modifier += 0.5
     elif event == 2:
-        event_text = "lentokentällä on myöhästymisiä ja lentokone joutuu kiertämään ilmassa ylimääräisen tunnin. Saat 30% enemmän päästöjä."
+        event_text = "There are delays at the airport and the plane has to circle in the air for an extra hour. You get 30% more emissions."
         score *= 1.3
     elif event == 3:
-        event_text = "ilmaliikenne on rauhallista, mikä lyhentää lentoreittejä. Vuoro kestää vain 0.75 kuukautta."
+        event_text = "Air traffic is calm, which shortens flight paths. The turnaround time is only 0.75 months."
         turn_modifier = 0.75
     elif event == 4:
-        event_text = "lentokoneen moottorissa on vikaa. Saat 20% enemmän päästöjä."
+        event_text = "There is a problem with the aircraft engine. You get 20% more emissions."
         score *= 1.2
     elif event == 5:
-        event_text = "lentokoneesi on lähes täysin buukattu amerikkalaisen matkailuyrityksen toimesta. lennon päästöt ovat 50% korkeammat"
+        event_text = "Your plane is almost completely booed by an american tourism company. The flight's emissions are 50% higher"
         score *= 1.5
 
     return score, turn_modifier, event_text
