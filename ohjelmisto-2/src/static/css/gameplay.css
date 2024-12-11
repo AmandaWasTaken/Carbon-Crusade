@@ -6,6 +6,7 @@ body {
     flex-direction: column;
     height: 100vh;
     background-color: #c9e8fd;
+    overflow-y: hidden;
 }
 
 
@@ -156,6 +157,44 @@ footer {
 
 
 #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#event-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+#event-popup p {
+    margin: 0;
+}
+
+#event-popup button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #1086ce;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#event-overlay {
     display: none;
     position: fixed;
     top: 0;
