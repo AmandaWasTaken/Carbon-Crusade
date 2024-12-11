@@ -134,7 +134,6 @@ def get_high_scores_route():
         }
         for row in results
     ]
-
     return jsonify(scores)
 
 
