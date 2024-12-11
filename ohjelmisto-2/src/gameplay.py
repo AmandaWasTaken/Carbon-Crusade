@@ -46,8 +46,10 @@ def remove_random_answers():
             remaining_country_indexes[selection-1] = 0
             break
 
-    return remaining_country_indexes, selection
-
+    return jsonify({
+        'remaining_indexes': remaining_country_indexes,
+        'selection': selection
+                   })
 
 @app.route('/count_player_points', methods=['POST'])
 def count_player_points():
@@ -60,7 +62,12 @@ def count_player_points():
     gained_score = country_options[flight_destination - 1][2] * 0.15 * 396
     gained_score, turns_left, did_event_happen, event_text = roll_random_event(gained_score, turns_left)
 
-    return gained_score, turns_left, did_event_happen, event_text
+    return jsonify ({
+        'gained_score': gained_score,
+        'turns_left': turns_left,
+        'did_event_happen': did_event_happen,
+        'event_text': event_text
+    })
 
 
 def roll_random_event(score, turns):
