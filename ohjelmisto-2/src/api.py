@@ -6,7 +6,7 @@ import databases as db
 import top5highscore
 
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__)
 
 def check_reserved(value_to_check: str) -> bool:
     cursor = db.conn.cursor()
