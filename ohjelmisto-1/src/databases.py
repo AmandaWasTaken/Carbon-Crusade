@@ -8,8 +8,9 @@ conn = mysql.connector.connect(
     port=3306,
     database='projekti',
     user='root',
-    password="Salasana123",
+    password="k1ssa",
     autocommit=True,
+    collation='utf8mb4_unicode_ci',
 )
 '''
 def fetch_airport_info(icao) -> None:

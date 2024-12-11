@@ -1,0 +1,31 @@
+.credits-container, .difficulty-container, .highscores-container {
+    padding: 20px;
+}
+
+.credit-item {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.score-item {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+}
+
+.scores-list {
+    margin: 20px 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+h2 {
+    color: #1a73e8;
+    margin-bottom: 20px;
+}
+
+.difficulty-container button {
+    margin: 10px 0;
+}
