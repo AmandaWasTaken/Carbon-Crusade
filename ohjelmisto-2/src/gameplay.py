@@ -102,9 +102,7 @@ def get_new_countries():
         'current_country': current_country,
         'wrong_countries': wrong_countries
     })
-    # return jsonify({
-    #     'message': "hellou"
-    # })
+
 
 
 if __name__ == '__main__':

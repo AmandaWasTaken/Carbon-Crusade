@@ -19,19 +19,38 @@ function button_click(answer_number){
   // console.log(country_data)
 }
 
-async function get_new_question(){
-  const response = await fetch('/get_new_countries');
-  const data = await response.json();
+let gameData;
 
-  const countries = data['all_country_options']
-  for (let i = 0; i < countries.length; i++){
-    const btn = "button" + (i+1)
-    document.getElementById(btn).innerHTML = countries[i]
-  }
-  // return [data['all_country_options'], data['current_country'], data['wrong_countries']]
-  // console.log(data['all_country_options'])
-  return data['all_country_options']
+async function get_new_question() {
+    const response = await fetch('/get_new_countries');
+    const data = await response.json();
+
+    const countries = data.all_country_options;
+    const currentCountryName = data.current_country[1];
+    const airportCode = data.current_country[0];
+    const continent = data.current_country[2];
+
+    const wrongCountriesData = data.wrong_countries[0];
+
+    for (let i = 0; i < countries.length; i++) {
+        const btn = "button" + (i + 1);
+        const button = document.getElementById(btn);
+        if (button) {
+            button.innerHTML = countries[i];
+        }
+    }
+
+    return data;
 }
-let country_data = get_new_question()
-console.log(get_new_question())
 
+
+document.addEventListener('DOMContentLoaded', async function() {
+    gameData = await get_new_question();
+    console.log("Stored game data:", gameData);
+    someOtherFunction();
+});
+
+
+function someOtherFunction() {
+  console.log("Current country is:", gameData.current_country[1]);
+}
