@@ -36,7 +36,6 @@ def distance(startPoint, destPoint):
 # Hakee 30 lentokenttää, joista valitaan 5 arvauksia varten. Kaksi valitaan lähimmistä viidestä ja loput jäljellä olevasta listasta. Tehdään näistä vielä 
 # listat, joissa maiden nimet, koordinaatit ja etäisyys lähtöpisteestä.  
 def getGuesses(exceptionCountry, startPoint):
-    # Use parameterized query to prevent SQL injection
     sql = """
     SELECT DISTINCT country.name, latitude_deg, longitude_deg
     FROM country
@@ -51,7 +50,7 @@ def getGuesses(exceptionCountry, startPoint):
     cursor.execute(sql, (exceptionCountry,))
     countries = cursor.fetchall()
 
-    # Create distances list with set to ensure unique countries
+
     seen_countries = set()
     distances = []
     for country in countries:
@@ -62,15 +61,15 @@ def getGuesses(exceptionCountry, startPoint):
             distances.append((countryName, coords, dist))
             seen_countries.add(countryName)
 
-    # Ensure we have enough unique countries
+
     if len(distances) < 5:
         raise ValueError("Not enough unique countries found")
 
-    # Get closest countries
+
     closestCountries = sorted(distances, key=lambda x: x[2])[:5]
     selectedClosest = random.sample(closestCountries, 2)
 
-    # Get remaining countries, ensuring no duplicates
+
     remainingCountries = [country for country in distances
                           if country not in selectedClosest]
 
