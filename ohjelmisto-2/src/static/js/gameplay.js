@@ -16,20 +16,22 @@ function close_info(){
 
 function button_click(answer_number){
   const jotai = 0
+  // console.log(country_data)
 }
 
 async function get_new_question(){
   const response = await fetch('/get_new_countries');
   const data = await response.json();
-  // console.log(data)
-  // console.log(data['all_country_options'])
-  // console.log("hello world")
+
   const countries = data['all_country_options']
   for (let i = 0; i < countries.length; i++){
-    // console.log(countries[i])
     const btn = "button" + (i+1)
-    // console.log(btn)
     document.getElementById(btn).innerHTML = countries[i]
   }
-
+  // return [data['all_country_options'], data['current_country'], data['wrong_countries']]
+  // console.log(data['all_country_options'])
+  return data['all_country_options']
 }
+let country_data = get_new_question()
+console.log(get_new_question())
+
