@@ -20,9 +20,13 @@ def compare_answer():
     correct_answer = data.get('correct_country') #str
 
     if countries[player_answer - 1] == correct_answer:
-        return True
+        return jsonify({
+            'success': True,
+        })
     else:
-        return False
+        return jsonify({
+            'success': False,
+        })
 
 
 @app.route('/remove_random_answers', methods=['POST'])
@@ -80,6 +84,12 @@ def get_new_countries():
         all_country_options.append(country[0])
     random.shuffle(all_country_options)
 
-    return all_country_options, current_country, wrong_countries
+    # return all_country_options, current_country, wrong_countries
+    return jsonify({
+        'all_country_options': all_country_options,
+        'current_country': current_country,
+        'wrong_countries': wrong_countries
+    })
 
-#
+if __name__ == '__main__':
+    app.run(use_reloader=True, debug=True, host='127.0.0.1', port=5000)
