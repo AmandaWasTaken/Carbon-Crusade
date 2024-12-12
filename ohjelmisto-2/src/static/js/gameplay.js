@@ -96,6 +96,7 @@ async function button_click(answer_number){
         reset_buttons()
         reset_hearts()
         reduce_turns()
+        gameData = await get_new_question();
       }
     }
 
@@ -103,6 +104,8 @@ async function button_click(answer_number){
     // jos vastaus oli oikein
     if (data.success === true){
       document.getElementById('random-event').innerHTML = "Correct!<br>Now choose where you want to fly."
+      document.getElementById('button' + answer_number).classList = "button-disabled"
+      document.getElementById('button' + answer_number).setAttribute("onclick", "")
       for (let i = 1; i < 7; i++){
         if (document.getElementById('button'+i).className === "button"){
           const button_content = i+6
@@ -130,20 +133,20 @@ async function button_click(answer_number){
       const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!"
       document.getElementById('random-event').innerHTML = content
       open_event()
-      gameData = await get_new_question();
       reset_buttons()
       reset_hearts()
       reduce_turns()
+      gameData = await get_new_question();
     }
     // jos ei tullut random eventtiä niin suoritetaan tämä
     if (data.did_event_happen === false){
       const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!"
       document.getElementById('random-event').innerHTML = content
       open_event()
-      gameData = await get_new_question();
       reset_buttons()
       reset_hearts()
       reduce_turns()
+      gameData = await get_new_question();
     }
   }
 }
