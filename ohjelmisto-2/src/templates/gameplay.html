@@ -8,56 +8,84 @@
     <script src="../static/js/gameplay.js" defer></script>
 </head>
 <body>
-    <header>
-       <img src="../static/Images/carboncrusadelogo_small.png" alt="cc" onclick="open_event()">
-       <div>TURNS: <p id="turns">12</p></div>
-       <div>SCORE: <p id="score">0</p></div>
-       <div id="info" onclick="open_info()">i</div>
-    </header>
+    <div class="game-container">
 
-    <div class="main-content">
-        <div class="left-buttons">
-            <button id="olj1" class="button">Lifeline 1: 50/50</button>
-            <button id="olj2" class="button">Lifeline 2: 50/50</button>
-            <button id="olj3" class="button">Lifeline 3: 50/50</button>
+        <header class="game-header">
+            <img src="../static/Images/carboncrusadelogo_small.png" alt="cc" onclick="open_event()" class="game-logo">
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span>TURNS:</span>
+                    <span id="turns">12</span>
+                </div>
+                <div class="stat-item">
+                    <span>SCORE:</span>
+                    <span id="score">0</span>
+                </div>
+                <div id="info" onclick="open_info()" class="info-button">i</div>
+            </div>
+        </header>
+
+        <div class="main-content">
+
+            <div class="lifelines">
+                <div class="menu-item">
+                    <button id="olj1" class="lifeline-button" onclick="usePowerup(1)">Lifeline: 50/50</button>
+                </div>
+                <div class="menu-item">
+                    <button id="olj2" class="lifeline-button" onclick="usePowerup(2)">Lifeline: 50/50</button>
+                </div>
+                <div class="menu-item">
+                    <button id="olj3" class="lifeline-button" onclick="usePowerup(3)">Lifeline: 50/50</button>
+                </div>
+            </div>
+
+
+            <div class="answer-grid">
+                <button id="button1" class="button" onclick="button_click(1)">Answer </button>
+                <button id="button2" class="button" onclick="button_click(2)">Answer </button>
+                <button id="button3" class="button" onclick="button_click(3)">Answer </button>
+                <button id="button4" class="button" onclick="button_click(4)">Answer </button>
+                <button id="button5" class="button" onclick="button_click(5)">Answer </button>
+                <button id="button6" class="button" onclick="button_click(6)">Answer </button>
+            </div>
         </div>
 
-        <div class="center-grid">
-            <button id="button1" class="button" onclick="button_click(1)">Vastaus 1</button>
-            <button id="button2" class="button" onclick="button_click(2)">Vastaus 2</button>
-            <button id="button3" class="button" onclick="button_click(3)">Vastaus 3</button>
-            <button id="button4" class="button" onclick="button_click(4)">Vastaus 4</button>
-            <button id="button5" class="button" onclick="button_click(5)">Vastaus 5</button>
-            <button id="button6" class="button" onclick="button_click(6)">Vastaus 6</button>
+
+        <footer class="game-footer">
+            <div class="question-container">
+                <p class="question-text">Which country is the given airport in?</p>
+                <p id="airport" class="airport-name">Airport Name Here</p>
+            </div>
+            <div class="hearts-container">
+                <img id="heart1" class="heart" src="../static/Images/heart_full.svg" alt="Heart 1">
+                <img id="heart2" class="heart" src="../static/Images/heart_full.svg" alt="Heart 2">
+                <img id="heart3" class="heart" src="../static/Images/heart_full.svg" alt="Heart 3">
+            </div>
+        </footer>
+
+
+        <div id="overlay" class="modal-overlay" onclick="close_info()"></div>
+        <div id="info-popup" class="modal">
+            <div class="modal-content">
+                <h2>Game Instructions</h2>
+                <div class="info-content">
+                    <p>The purpose of the game is to accumulate as much CO2 emissions as possible in the span of 24 months.</p>
+                    <p>To answer a question click one of the six buttons with a country name on it.</p>
+                    <p>After answering correctly, choose where to travel from the remaining options - the further you go, the more emissions you get.</p>
+                    <p>Wrong answers will remove your chosen option and a random option.</p>
+                    <p>Use lifelines to remove half of the answer options.</p>
+                </div>
+                <button id="close-popup" class="modal-button" onclick="close_info()">Close</button>
+            </div>
         </div>
-    </div>
 
-    <footer>
-    <div class="question">
-        <p>Which country is the given airport in?</p>
-        <p id="airport">Airport Name Here</p>
-    </div>
-    <div class="icons">
-        <img id="heart1" class="heart" src="../static/Images/heart_full.svg" alt="Heart 1">
-        <img id="heart2" class="heart" src="../static/Images/heart_full.svg" alt="Heart 2">
-        <img id="heart3" class="heart" src="../static/Images/heart_full.svg" alt="Heart 3">
-    </div>
-    </footer>
-
-    <div id="overlay" onclick="close_info()"></div>
-    <div id="info-popup">
-        <p>*The purpose of the game is to accumalate as much co2-emmissions as possible in the span of 24 months.</p>
-        <p>*To answer a question click one of the six buttons with a country name on it.</p>
-        <p>*After you have answered a question correctly you will get to choose where to travel from the remaining options, the further you go the more emmissions you get.</p>
-        <p>*If you answer incorrectly your chosen option and a random option will disappear. </p>
-        <p>*To use lifelines click a lifeline button on the left, the lifeline will delete half of the answer options.</p>
-        <button id="close-popup" onclick="close_info()">Close</button>
-    </div>
-
-    <div id="event-overlay" onclick="close_event()"></div>
-        <div id="event-popup">	
-        <p id="random-event"></p>
-        <button id="close-event-popup" onclick="close_event()">Close</button>
+        <div id="event-overlay" class="modal-overlay" onclick="close_event()"></div>
+        <div id="event-popup" class="modal">
+            <div class="modal-content">
+                <p id="random-event" class="event-text"></p>
+                <button id="close-event-popup" class="modal-button" onclick="close_event()">Close</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
