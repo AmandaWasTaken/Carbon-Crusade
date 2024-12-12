@@ -20,7 +20,7 @@ body {
     min-height: 80vh;
 }
 
-/* Header Styles */
+
 .game-header {
     display: flex;
     justify-content: space-between;
