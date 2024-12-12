@@ -130,8 +130,12 @@ async function button_click(answer_number){
     const data = await response.json();
     // jos tapahtui random event niin suoritetaan tämä
     if (data.did_event_happen === true){
-      const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!"
+      score = parseInt(data.gained_score)
+      const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!<br>" + data.event_text + "<br>You earned " + score + " points!"
       document.getElementById('random-event').innerHTML = content
+      document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML) + score
+      document.getElementById('turns').innerHTML = parseFloat(document.getElementById('turns').innerHTML) + data.turns_left
+
       open_event()
       reset_buttons()
       reset_hearts()
@@ -140,8 +144,10 @@ async function button_click(answer_number){
     }
     // jos ei tullut random eventtiä niin suoritetaan tämä
     if (data.did_event_happen === false){
-      const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!"
+      score = parseInt(data.gained_score)
+      const content = "You decided to fly to " + gameData.all_country_options[answer_number-7] + "!<br>You earned " + score + " points!"
       document.getElementById('random-event').innerHTML = content
+      document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML) + score
       open_event()
       reset_buttons()
       reset_hearts()
@@ -151,6 +157,17 @@ async function button_click(answer_number){
   }
 }
 // }
+
+async function lifeline(lifeline_number){
+  const countries = gameData.all_country_options
+  const correct_answer = gameData.current_country[1];
+  const correct_id = countries.indexOf(correct_answer) + 1
+  document.getElementById('button' + correct_id).classList = "button-gold"
+  document.getElementById('olj' + lifeline_number).classList = "lifeline-button-disabled"
+  document.getElementById('olj' + lifeline_number).setAttribute("onclick", "")
+
+
+}
 
 function reset_buttons(){
   for (let i = 1; i < 7; i++){
@@ -170,7 +187,19 @@ function reset_hearts(){
 
 function reduce_turns(){
   document.getElementById('turns').innerHTML = parseInt(document.getElementById('turns').innerHTML) - 1
+  if (parseInt(document.getElementById('turns').innerHTML) <= 0){
+    const content = "Congratulations, you have finished the game!<br>You got a total of " + parseInt(document.getElementById('score').innerHTML) + " points!"
+    document.getElementById('random-event').innerHTML = content
+    //document.getElementById('score').innerHTML
+    open_event()
+    document.getElementById('event-overlay').setAttribute('onclick', '')
+    document.getElementById('close-event-popup').setAttribute('onclick', '')
+    setTimeout(() => {
+      window.location.href = '/main_menu';
+    }, 5000);
+  }
 }
+
 
 
 let gameData
